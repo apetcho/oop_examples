@@ -119,7 +119,10 @@ class Circle(Shape):
         self._radius = value
 
     def draw(self):
-        pass
+        """Draw a circle"""
+        print("[Python] Drawing")
+        print(self)
+        print("[Python] Done!")
 
     def moveto(self, x, y):
         pass
