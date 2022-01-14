@@ -38,6 +38,14 @@ class Rectangle(Shape):
     def x(self, value):
         self._x = value
 
+    @property
+    def y(self):
+        return self._y
+
+    @y.setter
+    def y(self, value):
+        self._y = value
+
     def draw(self):
         pass
 
