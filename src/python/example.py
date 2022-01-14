@@ -30,6 +30,14 @@ class Rectangle(Shape):
         return (f"<rectangle llx={self._x} lly={self._y} "
             f"width={self._width} height={self._height}>")
 
+    @property
+    def x(self):
+        return self._x
+
+    @x.setter
+    def x(self, value):
+        self._x = value
+
     def draw(self):
         pass
 
