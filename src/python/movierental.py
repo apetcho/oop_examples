@@ -19,7 +19,8 @@ class RentStatus(Enum):
 
 class Movie:
     """Movie class."""
-    __slots__ = ("_title", "_stars", "_year", "_prodco", "_director", "_count")
+    __slots__ = ("_title", "_stars", "_year", "_production",
+         "_director", "_count")
 
     def __init__(self, title :str=None, stars: List[str]=None,
         year:int =None, prodco: str=None, director: List=None):
@@ -32,7 +33,7 @@ class Movie:
         self._title = title
         self._stars = stars
         self._year = year
-        self._prodco = prodco
+        self._production = prodco
         self._director = director
         self._count = 0
 
@@ -74,10 +75,10 @@ class Movie:
         pass
 
     @property
-    def production_company(self) -> str:
+    def production(self) -> str:
         pass
 
-    def set_production_company(self, prodco: str) -> None:
+    def set_production(self, production: str) -> None:
         pass
 
     @property
@@ -88,10 +89,22 @@ class Movie:
         pass
 
     def __str__(self) -> str:
-        pass
+        """String representation of a movie object."""
+        retval = (
+            f"<movie title={self._title} stars=[{self._stars[0]}, ...] "
+            f"year={self._year} production={self._production} "
+            f"director={self._director}>"
+        )
+        return retval
 
     def __repr__(self) -> str:
-        pass
+        """Movie interface represtenation"""
+        retval = (
+            f"Movie(title={self._title}, stars=[{self._stars[0]}, ...], "
+            f"year={self._year}, production={self._production}, "
+            f"director={self._director})"
+        )
+        return retval
 
 
 class Customer:
