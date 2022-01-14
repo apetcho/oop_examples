@@ -132,7 +132,7 @@ class Customer:
         return self._name
 
     def __eq__(self, other: "Customer") -> bool:
-        ok = (self._name == other.name) and (self._email == other.email)
+        ok = (str(self._uid) == str(other.uid))
         return ok
 
     def set_name(self, fn: str, ln:str) -> None:
@@ -176,7 +176,10 @@ class Customer:
         """
         for i, movie in enumerate(self._movies):
             if movie.title == title:
-                self._movies.pop(i)
+                try:
+                    self._movies.pop(i)
+                except IndexError:
+                    pass
                 break
 
     def __str__(self):
@@ -294,6 +297,58 @@ class RentalOffice:
 
     def close_session(self):
         pass
+
+
+PROMPT = "\x1b[32mrentmov>>\x1b[0m "
+
+
+def _read_customer() -> Customer:
+    fnm = input(f"Enter your first name:\n{PROMPT}")
+    lnm = input(f"Enter your last name:\n{PROMPT}")
+    eml = input(f"Enter your email:\n{PROMPT}")
+    customer = Customer(fname=fnm, lname=lnm, email=eml)
+    return customer
+
+""" 
+def _read_movie() -> Movie:
+    #print("Enter a movie")
+    #print("Enter number of main actors staring in the movie:")
+    num = int(input(f"Number of stars\n{PROMPT}"))
+    _title = input(f"Movie title:\n{PROMPT}")
+    _pyear = int(input(f"Year of production:\n{PROMPT}"))
+    _prdco = input(f"Production company:\n{PROMPT}")
+    _fname = input(f"Director's first name:\n{PROMPT}")
+    _lname = input(f"Director's last name:\n{PROMPT}")
+    _dname = Person(fname=_fname, lname=_lname)
+    _stars = []
+    for i in range(num):
+        print(f"Start #{(i+1)}")
+        _lname = input(f"First name:\n{PROMPT}")
+        _fname = input(f"Last name:\n{PROMPT}")
+        _stars.append(Person(fname=_fname, lname=_lname))
+
+    movie = Movie(
+        title=_title, stars=_stars, year=_pyear,
+        production=_prdco, director=_dname
+    )
+    return movie
+ """    
+
+
+def _make_movie_entry(movie: Movie) -> MovieEntry:
+    pass
+
+
+def _make_customer_entry(customer: Customer) -> CustomerEntry:
+    pass
+
+
+def _checkin(movie: Movie, customer: Customer) -> None:
+    pass
+
+
+def _checkout(movie: Movie, customer: Customer) -> None:
+    pass
 
 
 def main():
