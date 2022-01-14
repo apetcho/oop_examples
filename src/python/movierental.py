@@ -178,7 +178,12 @@ class Customer:
         return retval
 
     def __repr__(self):
-        pass
+        """Object representation of Customer object."""
+        fname = self._name.fname
+        lname = self._name.lname
+        email = self._email
+        retval = (f"Customer(fname={fname}, lname={lname}, email={email})")
+        return retval
 
 
 class RentalOffice:
