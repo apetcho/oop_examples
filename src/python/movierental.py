@@ -309,10 +309,10 @@ def _read_customer() -> Customer:
     customer = Customer(fname=fnm, lname=lnm, email=eml)
     return customer
 
-""" 
+
 def _read_movie() -> Movie:
-    #print("Enter a movie")
-    #print("Enter number of main actors staring in the movie:")
+    print("Enter a movie")
+    print("Enter number of main actors staring in the movie:")
     num = int(input(f"Number of stars\n{PROMPT}"))
     _title = input(f"Movie title:\n{PROMPT}")
     _pyear = int(input(f"Year of production:\n{PROMPT}"))
@@ -326,13 +326,11 @@ def _read_movie() -> Movie:
         _lname = input(f"First name:\n{PROMPT}")
         _fname = input(f"Last name:\n{PROMPT}")
         _stars.append(Person(fname=_fname, lname=_lname))
-
     movie = Movie(
         title=_title, stars=_stars, year=_pyear,
-        production=_prdco, director=_dname
-    )
+        production=_prdco, director=_dname)
     return movie
- """    
+    
 
 
 def _make_movie_entry(movie: Movie) -> MovieEntry:
