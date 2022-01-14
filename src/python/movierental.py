@@ -43,6 +43,10 @@ class Movie:
         self._production = production
         self._director = director
 
+    def __eq__(self, other: "Movie") -> bool:
+        ok = (self._title == other.title) and(self._director == other.director)
+        return ok
+
     @property
     def title(self) -> str:
         """Return movie title"""
