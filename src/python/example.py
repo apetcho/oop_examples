@@ -187,3 +187,6 @@ def main():
     for shape in shapes:
         del shape
 
+
+if __name__ == "__main__":
+    main()
