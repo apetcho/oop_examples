@@ -158,8 +158,15 @@ class Customer:
         if isinstance(movie, Movie):
             self._movies.append(movie)
 
-    def retmovie(self, title:str) -> None:
-        pass
+    def delmovie(self, title:str) -> None:
+        """Delete a movie from the movie list.
+        
+        @param title: title of movie.
+        """
+        for i, movie in enumerate(self._movies):
+            if movie.title == title:
+                self._movies.pop(i)
+                break
 
     def __str__(self):
         pass
