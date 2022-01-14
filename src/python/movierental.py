@@ -467,7 +467,7 @@ def main():
                 app.add_customer(customer)
             _checkout(app, movie, customer)
         if cmd[:2] == "sh":
-            pass
+            _show(app)
         if cmd[:2] == "di":
             pass
         if cmd[0] == "q":
