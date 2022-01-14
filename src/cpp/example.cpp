@@ -30,26 +30,38 @@ public:
 
 // ***
 Rectangle::Rectangle(int x, int y, int w, int h){
+    std::cout << "[C++] Rectangle" << std::endl;
     this->x = x;
     this->y = y;
     this->width = w;
     this->height = h;
+    std::cout << "<rectangle llx=" << x << " lly=" << y
+        << " width="<< width << " height=" << height << ">" << std::endl;
+    std::cout << "[C++] created!" << std::endl;
 }
 
 // **
 void Rectangle::draw(){
-    std::cout << "C++>> Drawing <Rectangle llx=" << x << " lly=" << y
+    std::cout << "[C++] Drawing" << std::endl
+        << " <rectangle llx=" << x << " lly=" << y
         << " width=" << width << " height=" << height << ">"
         << std::endl;
+    std::cout << "[C++] Done!" << std::endl;
 }
 
 // ***
 void Rectangle::moveto(int x, int y){
+    std::cout << "[C++] Moving" << std::endl;
+    std::cout << "<rectangle llx=" << this->x << " lly=" << this->y
+        << " width="<< this->width << " height=" << this->height
+        << ">" << std::endl;
     this->x = x;
     this->y = y;
-    std::cout << "C++>> Moving <Rectangle llx=" << x << " lly=" << y
-        << " width=" << width << " height=" << height << ">"
+    std::cout << "[C++] To" << std::endl;
+    std::cout << " <rectangle llx=" << this->x << " lly=" << this->y
+        << " width=" << this->width << " height=" << this->height << ">"
         << std::endl;
+    std::cout << "[C++] Done!" << std::endl;
 }
 
 /** Circle class */
@@ -72,29 +84,40 @@ public:
 
 // ***
 Circle::Circle(int x, int y, int radius){
+    std::cout << "[C++] Circle" << std::endl;
     this->x = x;
     this->y = y;
     this->radius = radius;
+    std::cout << "<circle cx=" << x << " cy=" << y
+        << " radius=" << radius << std::endl;
+    std::cout << "[C++] created!" << std::endl;
 }
 
 // ***
 void Circle::draw(){
-    std::cout << "C++>> Drawing <Circle cx=" << x << " cy=" << y
+    std::cout << "[C++] Drawing" << std::endl;
+    std::cout << "<circle cx=" << x << " cy=" << y
         <<  " radius" << radius << ">"<< std::endl;
+    std::cout << "[C++] Done!" << std::endl;
 }
 
 // ***
 void Circle::moveto(int x, int y){
+    std::cout << "[C++] Moving" << std::endl;
+    std::cout << "<circle cx=" << this->x << " cy=" << this->y
+        << " radius=" << this->radius << ">" << std::endl;
     this->x = x;
     this->y = y;
-    std::cout << "C++>> Moving <Circle cx=" << x << " cy=" << y
-        <<  " radius" << radius << ">"<< std::endl;
+    std::cout << "[C++] To" << std::endl;
+    std::cout << "<circle cx=" << this->x << " cy=" << this->y
+        <<  " radius" << this->radius << ">"<< std::endl;
+    std::cout << "[C++] Done!" << std::endl;
 }
 
 /* A function that uses a Shape polymorphically */
 void handle_shape(Shape* shape){
     std::cout << std::endl
-        <<"C++>> <-Polymorphism-> handle_shape():: moving to the corner!"
+        <<"[C++] <-Polymorphism-> handle_shape():: moving to the corner!"
         << std::endl;
     shape->moveto(0, 0);
 }
