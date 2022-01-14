@@ -91,3 +91,9 @@ void Circle::moveto(int x, int y){
     std::cout << "(C++) Moving the circle to (" << x << ", " << y << ")!"
         << std::endl;
 }
+
+/* A function that uses a Shape polymorphically */
+void handle_shape(Shape* shape){
+    std::cout << "handle_shape():: moving to the corner!" << std::endl;
+    shape->moveto(0, 0);
+}
