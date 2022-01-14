@@ -201,9 +201,14 @@ class RentalOffice:
         self._load_customers()
 
     @property
-    def manager(self):
+    def manager(self) -> Person:
         """Return Rental Office current manager."""
         return self._manager
+
+    @manager.setter
+    def manager(self, name: Person):
+        """Set current Rental Office manager."""
+        self._manager = name
 
     def add_customer(self, customer: Customer) -> None:
         pass
