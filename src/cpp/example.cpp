@@ -38,7 +38,7 @@ Rectangle::Rectangle(int x, int y, int w, int h){
 
 // **
 void Rectangle::draw(){
-    std::cout << "(C++)[Rectangle] Width = " << width
+    std::cout << "[C++]>> <Rectangle> Width = " << width
         << ", Height = " << height
         << " at position (" << x << ", " << y << ")"
         << std::endl;
@@ -48,7 +48,8 @@ void Rectangle::draw(){
 void Rectangle::moveto(int x, int y){
     this->x = x;
     this->y = y;
-    std::cout << "(C++) Moving the rectangle to (" << x << ", " << y << ")!"
+    std::cout << "C++>> <Rectangle> Moving the rectangle to ("
+        << x << ", " << y << ")!"
         << std::endl;
 }
 
@@ -79,7 +80,7 @@ Circle::Circle(int x, int y, int radius){
 
 // ***
 void Circle::draw(){
-    std::cout << "(C++) [Circle] Radius = " << radius
+    std::cout << "C++>> <Circle> Radius = " << radius
         << " at position (" << x << ", " << y << ")"
         << std::endl;
 }
@@ -88,13 +89,16 @@ void Circle::draw(){
 void Circle::moveto(int x, int y){
     this->x = x;
     this->y = y;
-    std::cout << "(C++) Moving the circle to (" << x << ", " << y << ")!"
+    std::cout << "C++>> <Circle> Moving the circle to ("
+        << x << ", " << y << ")!"
         << std::endl;
 }
 
 /* A function that uses a Shape polymorphically */
 void handle_shape(Shape* shape){
-    std::cout << "(C++) handle_shape():: moving to the corner!" << std::endl;
+    std::cout << std::endl
+        <<"C++>> <-Polymorphism-> handle_shape():: moving to the corner!"
+        << std::endl;
     shape->moveto(0, 0);
 }
 

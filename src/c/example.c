@@ -29,6 +29,22 @@ struct Rectangle {
 void Rectangle_draw(struct Shape* object){
     struct Rectangle *rect = (struct Rectangle*)object;
 
-    printf("(C) [Rectangle] Width = %d, Height = %d, at position (%d, %d)!\n",
+    printf(" C>> <Rectangle> Width = %d, Height = %d, at position (%d, %d)!\n",
         rect->width, rect->height, rect->x, rect->y);
+}
+
+// ***
+void Rectangle_moveto(struct Shape* object, int x, int y){
+    struct Rectangle *rect = (struct Rectangle *)object;
+    rect->x = x;
+    rect->y = y;
+
+    printf("  C>> <Rectangle> Moving the rectangle to (%d, %d)\n",
+        rect->x, rect->y);
+}
+
+// **
+void Rectangle_set_width(struct Shape* object, int width){
+    struct Rectangle *rect = (struct Rectangle*)object;
+    rect->width = width;
 }
