@@ -131,6 +131,10 @@ class Customer:
         """Return customer's name"""
         return self._name
 
+    def __eq__(self, other: "Customer") -> bool:
+        ok = (self._name == other.name) and (self._email == other.email)
+        return ok
+
     def set_name(self, fn: str, ln:str) -> None:
         """Set customer name.
 
