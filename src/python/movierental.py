@@ -47,8 +47,7 @@ class Movie:
 
     @property
     def stars(self) -> List[str]:
-        pass
-        #return self._stars
+        return self._stars
 
     def add_stars(self, star: Person) -> None:
         pass
