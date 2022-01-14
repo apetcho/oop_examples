@@ -224,7 +224,16 @@ class RentalOffice:
         self._customers.append(entry)
 
     def add_movies(self, movie: Movie) -> None:
-        pass
+        """Add a new movie to movie database."""
+        found = False
+        for entry in self._movies:
+            if movie == entry.movie:
+                entry.count += 1
+                found = True
+                break
+        if not found:
+            entry = MovieEntry(count=1, movie=movie)
+            self._movies.append(entry)
 
     def handle(self, movie: Movie, customer: Customer,
         status: RentStatus ) -> None:
