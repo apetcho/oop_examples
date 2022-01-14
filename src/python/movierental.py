@@ -148,7 +148,8 @@ class Customer:
 
     @property
     def movies(self) -> List[Movie]:
-        pass
+        """Return customer's movies list."""
+        return self._movies
 
     def addmovie(self, title:str) -> None:
         pass
