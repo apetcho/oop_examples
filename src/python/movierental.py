@@ -19,13 +19,22 @@ class RentStatus(Enum):
 
 class Movie:
     """Movie class."""
-    __slots__ = ("_title", "_stars", "_year", "_prodco", "_director", "_status",
-        "_count")
+    __slots__ = ("_title", "_stars", "_year", "_prodco", "_director", "_count")
 
     def __init__(self, title :str=None, stars: List[str]=None,
         year:int =None, prodco: str=None, director: List=None):
-        """"""
-        pass
+        """Initialize a movie object.
+        
+        @param title: movie title
+        @param stars: list of movie stars
+        @param year: year of production
+        @param prodco: production company name"""
+        self._title = title
+        self._stars = stars
+        self._year = year
+        self._prodco = prodco
+        self._director = director
+        self._count = 0
 
     @property
     def status(self) -> bool:
