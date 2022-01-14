@@ -151,8 +151,9 @@ class Customer:
         """Return customer's movies list."""
         return self._movies
 
-    def addmovie(self, title:str) -> None:
-        pass
+    def addmovie(self, movie:Movie) -> None:
+        """Add movie to customer movies list."""
+        self._movies.append(movie)
 
     def retmovie(self, title:str) -> None:
         pass
