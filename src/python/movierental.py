@@ -169,7 +169,13 @@ class Customer:
                 break
 
     def __str__(self):
-        pass
+        """String representation of Customer."""
+        retval = (
+            f"firstname={self._name.fname}, lastname={self._name.lname} "
+            f"email={self._email}\nuid={self._uid}\n"
+            f"movies={self._movies!r}"
+        )
+        return retval
 
     def __repr__(self):
         pass
