@@ -239,7 +239,7 @@ class RentalOffice:
         if not already:
             self._customers.append(entry)
 
-    def add_movie(self, movie: Movie) -> None:
+    def addmovie(self, movie: Movie) -> None:
         """Add a new movie to movie database."""
         found = False
         for entry in self._movies:
