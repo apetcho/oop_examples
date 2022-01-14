@@ -469,7 +469,13 @@ def main():
         if cmd[:2] == "sh":
             _show(app)
         if cmd[:2] == "di":
-            pass
+            customer = _read_customer()
+            for entry in app.customers:
+                cond1 = (customer.email == entry.email)
+                cond2 = (customer.name == entry.name)
+                if cond1 and cond2:
+                    _disp(customer)
+                    break
         if cmd[0] == "q":
             pass
 
