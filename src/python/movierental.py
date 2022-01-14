@@ -10,6 +10,8 @@ This program model a movie rental office (shope). The main components are:
 from typing import List
 from enum import Enum, auto
 from collections import namedtuple
+import uuid
+
 
 Person = namedtuple("Person", "fname lname")
 
@@ -104,23 +106,24 @@ class Movie:
 class Customer:
     """Customer class."""
 
-    __slots__ = ("_fname", "_lname", "_email", "_movies", "_cid")
+    __slots__ = ("_name", "_email", "_movies", "_cid")
 
     def __init__(self, fname: str=None, lname: str=None, email: str=None):
-        pass
+        """Initialize Customer object.
+        
+        @param fname: customer's firstname
+        @param lname: customer's lastname
+        @param email: customer's email"""
+        self._name = Person(fname=fname, lname=lname)
+        self._email = email
+        self._movies: List[Movie] = []
+        self._cid = uuid.uuid4()
 
     @property
-    def firstname(self) -> str:
+    def name(self) -> str:
         pass
 
-    def set_firstname(self, fname: str) -> None:
-        pass
-
-    @property
-    def lastname(self) -> str:
-        pass
-
-    def set_lastname(self, lname: str) -> None:
+    def set_name(self, fn: str, ln:str) -> None:
         pass
 
     @property
@@ -138,10 +141,10 @@ class Customer:
     def movies(self) -> List[Movie]:
         pass
 
-    def addmovie(self, movie: Movie) -> None:
+    def addmovie(self, title:str) -> None:
         pass
 
-    def retmovie(self, movie: Movie) -> None:
+    def retmovie(self, title:str) -> None:
         pass
 
     def __str__(self):
