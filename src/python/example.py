@@ -94,6 +94,14 @@ class Circle(Shape):
         """String representation of a Circle object."""
         return f"<circle cx={self._x} cy={self._y} radius={self._radius}>"
 
+    @property
+    def x(self):
+        return self._x
+
+    @x.setter
+    def x(self, value):
+        self._x = value
+
     def draw(self):
         pass
 
