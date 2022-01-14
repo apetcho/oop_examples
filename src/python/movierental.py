@@ -43,8 +43,7 @@ class Movie:
         return self._title
 
     def set_title(self, title: str) -> None:
-        pass
-        #self._title = title
+        self._title = title
 
     @property
     def stars(self) -> List[str]:
