@@ -106,7 +106,7 @@ class Movie:
 class Customer:
     """Customer class."""
 
-    __slots__ = ("_name", "_email", "_movies", "_cid")
+    __slots__ = ("_name", "_email", "_movies", "_uid")
 
     def __init__(self, fname: str=None, lname: str=None, email: str=None):
         """Initialize Customer object.
@@ -117,7 +117,7 @@ class Customer:
         self._name = Person(fname=fname, lname=lname)
         self._email = email
         self._movies: List[Movie] = []
-        self._cid = uuid.uuid4()
+        self._uid = uuid.uuid4()    # customer unique identifier
 
     @property
     def name(self) -> Person:
@@ -142,8 +142,9 @@ class Customer:
         self._email = email
 
     @property
-    def customer_id(self) -> str:
-        pass
+    def uid(self) -> str:
+        """Return custormer unique identifier."""
+        return self._uid
 
     @property
     def movies(self) -> List[Movie]:
