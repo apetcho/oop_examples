@@ -200,6 +200,11 @@ class RentalOffice:
         self._load_movies()
         self._load_customers()
 
+    @property
+    def manager(self):
+        """Return Rental Office current manager."""
+        return self._manager
+
     def add_customer(self, customer: Customer) -> None:
         pass
 
