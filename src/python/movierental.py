@@ -64,7 +64,7 @@ class Movie:
         return self._production
 
     def set_production(self, production: str) -> None:
-        pass
+        self._production = production
 
     @property
     def director(self) -> str:
