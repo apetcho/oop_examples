@@ -15,6 +15,11 @@ class Shape(ABC):
         """Move a shape to (x, y)."""
         pass
 
+    @abstractmethod
+    def __del__(self):
+        # Not really necessary
+        pass
+
 
 class Rectangle(Shape):
     """Rectangle class."""
@@ -79,6 +84,16 @@ class Rectangle(Shape):
         self._x = x
         self._y = y
         print(self)
+        print("[Python] Done!")
+
+    def __del__(self):
+        """"""
+        print("[Python] Calling del on ")
+        print(self)
+        self._x = None
+        self._y = None
+        self._width = None
+        self._height = None
         print("[Python] Done!")
         
 
@@ -157,4 +172,4 @@ def main():
     rect = Rectangle(1, 2, 3, 4)
     rect.width = 5
     rect.draw(rect)
-    
+
