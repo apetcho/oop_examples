@@ -26,6 +26,13 @@ public:
     void set_height(int h){ this->height = h; }
     virtual void draw();
     virtual void moveto(int x, int y);
+    ~Rectangle(){
+        std::cout << "[C++] Destroying" << std::endl;
+        std::cout << "<rectangle llx=" << this->x << " lly=" << this->y
+            << " width="<< this->width
+            << " height=" << this->height << ">" << std::endl;
+        std::cout << "[C++] Done!" << std::endl;
+    }
 };
 
 // ***
@@ -36,7 +43,8 @@ Rectangle::Rectangle(int x, int y, int w, int h){
     this->width = w;
     this->height = h;
     std::cout << "<rectangle llx=" << x << " lly=" << y
-        << " width="<< width << " height=" << height << ">" << std::endl;
+        << " width=" << width << " height=" << height << ">"
+        << std::endl;
     std::cout << "[C++] Done!" << std::endl;
 }
 
@@ -59,8 +67,8 @@ void Rectangle::moveto(int x, int y){
     this->y = y;
     std::cout << "[C++] To" << std::endl;
     std::cout << " <rectangle llx=" << this->x << " lly=" << this->y
-        << " width=" << this->width << " height=" << this->height << ">"
-        << std::endl;
+        << " width=" << this->width << " height=" << this->height
+        << ">" << std::endl;
     std::cout << "[C++] Done!" << std::endl;
 }
 
@@ -80,6 +88,12 @@ public:
     void setx(int x){ this->x = x; }
     void sety(int y){ this->y = y; }
     void set_radius(int radius ){ this->radius = radius; }
+    ~Circle(){
+        std::cout << "[C++] Destroying" << std::endl;
+        std::cout << "<circle cx=" << this->x << " cy=" << this->y
+            << " radius=" << this->radius << ">" << std::endl;
+        std::cout << "[C++] Done!" << std::endl;
+    }
 };
 
 // ***
@@ -89,7 +103,7 @@ Circle::Circle(int x, int y, int radius){
     this->y = y;
     this->radius = radius;
     std::cout << "<circle cx=" << x << " cy=" << y
-        << " radius=" << radius << std::endl;
+        << " radius=" << radius << ">" << std::endl;
     std::cout << "[C++] Done!" << std::endl;
 }
 
@@ -97,7 +111,7 @@ Circle::Circle(int x, int y, int radius){
 void Circle::draw(){
     std::cout << "[C++] Drawing" << std::endl;
     std::cout << "<circle cx=" << x << " cy=" << y
-        <<  " radius" << radius << ">"<< std::endl;
+        <<  " radius" << radius << ">" << std::endl;
     std::cout << "[C++] Done!" << std::endl;
 }
 

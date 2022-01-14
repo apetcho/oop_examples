@@ -66,8 +66,11 @@ void Rectangle_set_width(struct Shape* object, int width){
 
 // ***
 void Rectangle_destroy(struct Shape *object){
+    puts("[C] Destroying ");
+    PRINT_RECT((struct Rectangle*)object);
     Shape_destroy(object);
     free(object);
+    puts("[C] Done!");
 }
 
 
@@ -130,8 +133,11 @@ void Circle_moveto(struct Shape* object, int x, int y){
 
 // ***
 void Circle_destroy(struct Shape *object){
+    puts("[C] Destroying ");
+    PRINT_CIRCLE((struct Circle*)object);
     Shape_destroy(object);
     free(object);
+    puts("[C] Done!");
 }
 
 // ***
@@ -175,5 +181,34 @@ struct Shape* Circle_new(int x, int y, int radius){
 
 /* A function taht uses a Shape polymophically */
 void handle_shape(struct Shape* object){
+    puts("[C] Handling shape polymorphically");
     SHAPE_MOVETO(object, 0, 0);
+    puts("[C] Done!");
+}
+
+
+// ----------------
+//   Main Driver
+// ----------------
+int main(){
+    struct Shape* shapes[2];
+    /* using shapes polymorphically */
+    shapes[0] = Rectangle_new(20, 21, 123, 321);
+    shapes[1] = Circle_new(21, 12, 2022);
+    for(int i=0; i < 2; i++){
+        SHAPE_DRAW(shapes[i]);
+        handle_shape(shapes[i]);
+    }
+
+    /* accessing Rectangle specific data */
+    struct Rectangle* rect = Rectangle_new(1, 2, 3, 4);
+    RECTANGLE_SETWIDTH(rect, 5);
+    SHAPE_DRAW(rect);
+    SHAPE_DESTROY(rect);
+
+    for(int i=0; i < 2; i++){
+        SHAPE_DESTROY(shapes[i]);
+    }
+
+    return EXIT_SUCCESS;
 }
