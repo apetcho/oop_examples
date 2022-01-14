@@ -68,7 +68,7 @@ class Movie:
 
     @property
     def director(self) -> str:
-        pass
+        return self._director
 
     def set_director(self, director:str) -> None:
         pass
