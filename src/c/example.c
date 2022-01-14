@@ -132,3 +132,14 @@ void Circle_destroy(struct Shape *object){
     Shape_destroy(object);
     free(object);
 }
+
+// ***
+struct CircleFunTable{
+    struct ShapeFunTable super;
+} circleFunTable = {
+    {
+        .draw = Circle_draw,
+        .moveto = Circle_moveto,
+        .destroy = Circle_destroy,
+    }
+};
