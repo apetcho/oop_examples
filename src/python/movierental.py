@@ -221,6 +221,10 @@ class RentalOffice:
     def movies(self):
         return self._movies
 
+    @property
+    def customers(self):
+        return self._customers
+
     @manager.setter
     def manager(self, name: Person):
         """Set current Rental Office manager."""
