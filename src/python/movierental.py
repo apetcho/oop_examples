@@ -7,7 +7,6 @@ This program model a movie rental office (shope). The main components are:
 - Customer: a customer class
 - RentalShop: a rental shop class
 """
-from calendar import c
 from typing import List
 from enum import Enum, auto
 from collections import namedtuple
@@ -295,8 +294,21 @@ class RentalOffice:
                     break
 
 
-    def _load_movies(self):
-        pass
+    def _load_movies(self, filename: str):
+        import json
+        movies = json.load(filename)
+        for movie in movies:
+            title = movie["title"]
+            year = movie["year"]
+            _prod = movie["production"]
+            director = movie["director"]
+            stars = movie["stars"]
+            _dir = Person(fname=director[0], lname=director[1])
+            _stars = []
+            for star in stars:
+                _stars.append(Person(fname=star[0], lname=star[0]))
+            self._movies = []
+            self._movies.append(Movie(title, _stars, year, _prod, _dir))
 
     def _load_customers(self):
         pass
