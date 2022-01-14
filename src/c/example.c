@@ -13,6 +13,14 @@ struct ShapeFunTable {
     void (*destroy)(struct Shape *object);
 };
 
-// never create an instance shape directly: this make it an abstract interface
+// never create an instance shape directly: these make it an abstract interface
 struct Shape* Shape_new(){ assert(0); }
+void Shape_destroy(struct Shape* object){}
 
+/* Rectangle class */
+struct Rectangle {
+    struct Shape super;
+    int x, y;
+    int width;
+    int height;
+};
