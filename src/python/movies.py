@@ -39,5 +39,5 @@ append_movie(
 )
 
 with open("movies.json", "w") as fp:
-    movies = dict(movies=MOVIES)
-    json.dump(movies, fp)
+    #movies = dict(movies=MOVIES)
+    json.dump(MOVIES, fp)

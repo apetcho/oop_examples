@@ -7,6 +7,7 @@ This program model a movie rental office (shope). The main components are:
 - Customer: a customer class
 - RentalShop: a rental shop class
 """
+from random import randint
 from typing import List
 from enum import Enum, auto
 from collections import namedtuple
@@ -15,13 +16,12 @@ import uuid
 
 Person = namedtuple("Person", "fname lname")
 MovieEntry = namedtuple("MovieEntry", "count movie")
-CustomerEntry = namedtuple("CustomerEntry", "name email uid movies")
+
 
 
 class RentStatus(Enum):
     CHECKIN = auto()
     CHECKOUT = auto()
-
 
 
 class Movie:
@@ -60,7 +60,7 @@ class Movie:
         """Return movie stars list."""
         return self._stars
 
-    def add_stars(self, stars: List(Person)) -> None:
+    def add_stars(self, stars: List[Person]) -> None:
         """Add (a) star(s) to movie stars list."""
         self._stars.extend(list(stars))
 
@@ -94,9 +94,9 @@ class Movie:
     def __str__(self) -> str:
         """String representation of a movie object."""
         retval = (
-            f"<movie title={self._title} stars=[{self._stars[0]}, ...] "
-            f"year={self._year} production={self._production} "
-            f"director={self._director}>"
+            f"<movie title={self._title} stars=[{self._stars[0]!r}, ...] "
+            f"year={self._year} production={self._production!r} "
+            f"director={self._director!r}>"
         )
         return retval
 
@@ -207,9 +207,9 @@ class RentalOffice:
         """Initialize RentalOffice instance."""
         self._manager = manager
         self._movies: List[MovieEntry] = []
-        self._customers: List[CustomerEntry] = []
-        self._load_movies()
-        self._load_customers()
+        self._customers: List[Customer] = []
+        self._load_movies("movies.json")
+        self._load_customers("customers.json")
 
     @property
     def manager(self) -> Person:
@@ -231,16 +231,9 @@ class RentalOffice:
 
     def add_customer(self, customer: Customer) -> None:
         """Add a customer."""
-        movies = customer.movies
-        email = customer.email
-        uid = customer.uid
-        name = customer.name
-        entry = CustomerEntry(
-            name=name, email=email, movies=movies, uid=uid
-        )
         already = False
-        for item in self._customers:
-            if str(item.uid) == str(customer.uid):
+        for entry in self._customers:
+            if entry == customer:
                 already = True
                 break
         if not already:
@@ -296,7 +289,9 @@ class RentalOffice:
 
     def _load_movies(self, filename: str):
         import json
-        movies = json.load(filename)
+        movies = []
+        with open(filename, "r") as fp:
+            movies = json.load(fp)
         for movie in movies:
             title = movie["title"]
             year = movie["year"]
@@ -308,7 +303,9 @@ class RentalOffice:
             for star in stars:
                 _stars.append(Person(fname=star[0], lname=star[0]))
             self._movies = []
-            self._movies.append(Movie(title, _stars, year, _prod, _dir))
+            count = randint(1, 100)
+            entry = MovieEntry(count, Movie(title, _stars, year, _prod, _dir))
+            self._movies.append(entry)
 
     def _load_customers(self, filename):
         import json
@@ -318,7 +315,9 @@ class RentalOffice:
                 fname = customer[0]
                 lname = customer[1]
                 email = customer[2]
-                self._customers.append(Customer(fname, lname, email))
+                _c = Customer(fname, lname, email)
+                entry = CustomerEntry(Person(fname, lname), email, _c.uid, [])
+                self._customers.append(entry)
 
     def close_session(self):
         pass
@@ -371,9 +370,10 @@ def _show(obj: RentalOffice):
     print(f"{dash}")
     print(" Index | Count | Movie ")
     print(f"{dash}")
-    for i, movie in enumerate(movies):
-        count = movie.count
-        line = f"{(i+1):5d} | {count:5d} | {movie!r} "
+    for i, entry in enumerate(movies):
+        count = entry.count
+        movie = entry.movie
+        line = f"{(i+1):5d} | {count:5d} | {movie:s} "
         print(f"{line}")
     print()
     customers = obj.customers
@@ -388,8 +388,8 @@ def _show(obj: RentalOffice):
     print(f"{dash}")
     for i, customer in enumerate(customers):
         email = customer.email
-        name = customer.name
-        print(f" {(i+1):<5d} | {email:<15s} | {name:<24s} ")
+        name = customer.name._asdict()
+        print(f" {(i+1):<5d} | {email:<15s} | {name!r} ")
 
 
 def _disp(customer: Customer):
