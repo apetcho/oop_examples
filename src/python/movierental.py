@@ -71,7 +71,7 @@ class Movie:
         return self._director
 
     def set_director(self, director:str) -> None:
-        pass
+        self._director = director
 
     def __str__(self) -> str:
         """String representation of a movie object."""
