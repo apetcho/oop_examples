@@ -477,7 +477,8 @@ def main():
                     _disp(customer)
                     break
         if cmd[0] == "q":
-            pass
+            break
+    return
 
 
 if __name__ == "__main__":
