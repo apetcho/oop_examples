@@ -48,3 +48,9 @@ void Rectangle_set_width(struct Shape* object, int width){
     struct Rectangle *rect = (struct Rectangle*)object;
     rect->width = width;
 }
+
+// ***
+void Rectangle_destroy(struct Shape *object){
+    Shape_destroy(object);
+    free(object);
+}
