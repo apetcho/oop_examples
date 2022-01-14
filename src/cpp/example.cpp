@@ -38,8 +38,8 @@ Rectangle::Rectangle(int x, int y, int w, int h){
 
 // **
 void Rectangle::draw(){
-    std::cout << "Rectangle with WIDTH = " << width
-        << ", HEIGHT = " << height
+    std::cout << "[Rectangle] Width = " << width
+        << ", Height = " << height
         << " at position (" << x << ", " << y << ")"
         << std::endl;
 }
@@ -78,3 +78,9 @@ Circle::Circle(int x, int y, int radius){
 }
 
 // ***
+void Circle::draw(){
+    std::cout << "[Circle] Radius = " << radius
+        << " at position (" << x << ", " << y << ")"
+        << std::endl;
+}
+
