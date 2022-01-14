@@ -189,9 +189,16 @@ class Customer:
 class RentalOffice:
     """RentalOffice class."""
     __slots__ = "_movies", "_customers", "_manager"
+    MovieItem = namedtuple("MovieItem", "count movie")
 
-    def __init__(self, manager:str):
-        pass
+
+    def __init__(self, manager:Person = None):
+        """Initialize RentalOffice instance."""
+        self._manager = manager
+        self._movies: List[RentalOffice.MovieItem] = []
+        self._customers: List[tuple] = []
+        self._load_movies()
+        self._load_customers()
 
     def add_customer(self, customer: Customer) -> None:
         pass
