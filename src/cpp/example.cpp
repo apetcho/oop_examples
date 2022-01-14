@@ -30,14 +30,14 @@ public:
 
 // ***
 Rectangle::Rectangle(int x, int y, int w, int h){
-    std::cout << "[C++] Rectangle" << std::endl;
+    std::cout << "[C++] Creating new rectangle" << std::endl;
     this->x = x;
     this->y = y;
     this->width = w;
     this->height = h;
     std::cout << "<rectangle llx=" << x << " lly=" << y
         << " width="<< width << " height=" << height << ">" << std::endl;
-    std::cout << "[C++] created!" << std::endl;
+    std::cout << "[C++] Done!" << std::endl;
 }
 
 // **
@@ -84,13 +84,13 @@ public:
 
 // ***
 Circle::Circle(int x, int y, int radius){
-    std::cout << "[C++] Circle" << std::endl;
+    std::cout << "[C++] Creating new circle" << std::endl;
     this->x = x;
     this->y = y;
     this->radius = radius;
     std::cout << "<circle cx=" << x << " cy=" << y
         << " radius=" << radius << std::endl;
-    std::cout << "[C++] created!" << std::endl;
+    std::cout << "[C++] Done!" << std::endl;
 }
 
 // ***

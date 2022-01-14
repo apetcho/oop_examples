@@ -2,6 +2,13 @@
 #include<stdio.h>
 #include<assert.h>
 
+#define PRINT_RECT(rect)                                        \
+    printf("<rectangle llx=%d lly=%d width=%d height=%d>\n",    \
+        rect->x, rect->y, rect->width, rect->height)
+
+#define PRINT_CIRCLE(circle)                    \
+    printf("<circle cx=%d cy=%d radius=%d>",     \
+        circle->x, circle->y, circle->radius)
 /* Shape abstract interface */
 struct Shape {
     struct ShapeFunTable *funTable;
@@ -28,25 +35,32 @@ struct Rectangle {
 // ***
 void Rectangle_draw(struct Shape* object){
     struct Rectangle *rect = (struct Rectangle*)object;
-
-    printf(" C>> Drawing <Rectangle llx=%d lly=%d width=%d height=%d>\n",
-        rect->x, rect->y, rect->width, rect->height);
+    puts("[C] Drawing");
+    PRINT_RECT(rect);
+    puts("[C] Done!");
 }
 
 // ***
 void Rectangle_moveto(struct Shape* object, int x, int y){
     struct Rectangle *rect = (struct Rectangle *)object;
+    puts("[C] Moving ");
+    PRINT_RECT(rect);
     rect->x = x;
     rect->y = y;
-
-    printf("  C>> Moving <Rectangle llx=%d lly=%d width=%d height=%d>\n",
-        rect->x, rect->y, rect->width, rect->height);
+    puts("[C] To");
+    PRINT_RECT(rect);
+    puts("[C] Done!");
 }
 
 // **
 void Rectangle_set_width(struct Shape* object, int width){
     struct Rectangle *rect = (struct Rectangle*)object;
+    puts("[C] Rectangle:: modifiy the width");
+    PRINT_RECT(rect);
     rect->width = width;
+    puts("[C] Rectangle:: width modified");
+    PRINT_RECT(rect);
+    puts("[C] Done!");
 }
 
 // ***
@@ -71,6 +85,7 @@ struct RectangleFunTable{
 
 // ***
 struct Shape* Rectangle_new(int x, int y, int width, int height){
+    puts("[C] Creating a new rectangle");
     struct Rectangle* object = (struct Rectangle*)malloc(
         sizeof(struct Rectangle));
     object->super.funTable = (struct ShapeFunTable*)&rectangleFunTable;
@@ -78,6 +93,8 @@ struct Shape* Rectangle_new(int x, int y, int width, int height){
     object->y = y;
     object->width = width;
     object->height = height;
+    PRINT_RECT(object);
+    puts("[C] Done!");
 
     return (struct Shape*)object;
 }
@@ -93,6 +110,19 @@ struct Circle{
 // ***
 void Circle_draw(struct Shape* object){
     struct Circle* circle = (struct Circle*) object;
-    printf("  C>> Drawing <Circle cx=%d cy=%d radius=%d>\n",
-        circle->x, circle->y, circle->radius);
+    puts("[C] Drawing");
+    PRINT_CIRCLE(circle);
+    puts("[C] Done!");
+}
+
+// ***
+void Circle_moveto(struct Shape* object, int x, int y){
+    struct Circle* circle = (struct Circle*)object;
+    puts("[C] Moving ");
+    PRINT_CIRCLE(circle);
+    puts("[C] To");
+    circle->x = x;
+    circle->y = y;
+    PRINT_CIRCLE(circle);
+    puts("[C] Done!");
 }
