@@ -103,9 +103,9 @@ class Movie:
     def __repr__(self) -> str:
         """Movie interface represtenation"""
         retval = (
-            f"Movie(title={self._title}, stars=[{self._stars[0]}, ...], "
-            f"year={self._year}, production={self._production}, "
-            f"director={self._director})")
+            rf"Movie(title={self._title}, stars=[{self._stars[0]}, ...], "
+            rf"year={self._year}, production={self._production}, "
+            rf"director={self._director})")
         return retval
 
 
@@ -183,10 +183,12 @@ class Customer:
 
     def __str__(self):
         """String representation of Customer."""
+        uid = str(self._uid)
         retval = (
-            f"firstname={self._name.fname}, lastname={self._name.lname} "
-            f"email={self._email}\nuid={self._uid}\n"
-            f"movies={self._movies!r}"
+            f"<name={self._name.fname.title()!r}, "
+            f"lname={self._name.lname.title()!r} "
+            f"email={self._email!r} uid={uid!r} "
+            f"movies={self._movies!r}>"
         )
         return retval
 
@@ -195,7 +197,10 @@ class Customer:
         fname = self._name.fname
         lname = self._name.lname
         email = self._email
-        retval = (f"Customer(fname={fname}, lname={lname}, email={email})")
+        retval = (
+            f"Customer(fname={fname.title()!r},"
+            f" lname={lname.title()!r}, email={email!r})"
+        )
         return retval
 
 
@@ -255,9 +260,9 @@ class RentalOffice:
         status: RentStatus ) -> None:
         """Handle movie checkin and checkout for a given customer."""
         for entry in self._movies:
+            me = entry
             if status == RentStatus.CHECKIN:
                 if movie == entry.movie:
-                    me = entry
                     entry = entry._asdict()
                     entry["count"] += 1
                     newentry = MovieEntry(
@@ -271,7 +276,6 @@ class RentalOffice:
                     customer.delmovie(movie)
                     break
             elif status == RentStatus.CHECKOUT:
-                me = entry
                 if movie == entry.movie:
                     entry = entry._asdict()
                     entry["count"] -= 1
@@ -290,22 +294,23 @@ class RentalOffice:
     def _load_movies(self, filename: str):
         import json
         movies = []
+        self._movies = []
         with open(filename, "r") as fp:
             movies = json.load(fp)
-        for movie in movies:
-            title = movie["title"]
-            year = movie["year"]
-            _prod = movie["production"]
-            director = movie["director"]
-            stars = movie["stars"]
-            _dir = Person(fname=director[0], lname=director[1])
-            _stars = []
-            for star in stars:
-                _stars.append(Person(fname=star[0], lname=star[0]))
-            self._movies = []
-            count = randint(1, 100)
-            entry = MovieEntry(count, Movie(title, _stars, year, _prod, _dir))
-            self._movies.append(entry)
+            for movie in movies:
+                title = movie["title"]
+                year = movie["year"]
+                _prod = movie["production"]
+                director = movie["director"]
+                stars = movie["stars"]
+                _dir = Person(fname=director[0], lname=director[1])
+                _stars = []
+                for star in stars:
+                    _stars.append(Person(fname=star[0], lname=star[0]))
+                count = randint(1, 100)
+                entry = MovieEntry(
+                    count, Movie(title, _stars, year, _prod, _dir))
+                self._movies.append(entry)
 
     def _load_customers(self, filename):
         import json
@@ -315,8 +320,7 @@ class RentalOffice:
                 fname = customer[0]
                 lname = customer[1]
                 email = customer[2]
-                _c = Customer(fname, lname, email)
-                entry = CustomerEntry(Person(fname, lname), email, _c.uid, [])
+                entry = Customer(fname, lname, email)
                 self._customers.append(entry)
 
     def close_session(self):
@@ -366,30 +370,33 @@ def _checkout(rent:RentalOffice, movie: Movie, customer: Customer) -> None:
 
 def _show(obj: RentalOffice):
     movies = obj.movies
-    dash = "=" * 40
+    dash = "=" * 72
     print(f"{dash}")
-    print(" Index | Count | Movie ")
+    color = "\x1b[3;33m"
+    reset = "\x1b[0m"
+    header = color + " Index | Copies | Movie " + reset
+    print(header)
     print(f"{dash}")
     for i, entry in enumerate(movies):
         count = entry.count
-        movie = entry.movie
-        line = f"{(i+1):5d} | {count:5d} | {movie:s} "
+        movie = str(entry.movie)[:50]
+        line = f" {(i+1):^5d} | {count:^5d} | {movie} ..."
         print(f"{line}")
     print()
     customers = obj.customers
-    dash = "*" * 50
-    email = "Email"
-    name = "Name"
+    dash = "*" * 72
+    #email = "Email"
+    name = "Customer"
     color = "\x1b[3;32m"
     reset = "\x1b[0m"
-    header = color + f" Index | {email:<15s} | {name:<24s} " + reset
+    header = color + f" Index |  {name} " + reset
     print(f"{dash}")
     print(header)
     print(f"{dash}")
     for i, customer in enumerate(customers):
-        email = customer.email
-        name = customer.name._asdict()
-        print(f" {(i+1):<5d} | {email:<15s} | {name!r} ")
+        #email = customer.email[:14]
+        name = str(customer)[:57]
+        print(f" {(i+1):^5d} |  {name} ...")
 
 
 def _disp(customer: Customer):
