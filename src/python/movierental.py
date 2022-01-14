@@ -386,9 +386,11 @@ def _disp(customer: Customer):
         print(f"[{(i+1):^3d}] {movie:s}")
 
 
-
-def _add():
-    pass
+def _add(rent: RentalOffice, movie: Movie=None, customer: Customer=None):
+    if movie is not None:
+        rent.addmovie(movie)
+    if customer is not None:
+        rent.add_customer(customer)
 
 
 def main():
