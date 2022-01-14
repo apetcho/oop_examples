@@ -25,7 +25,7 @@ class Movie:
     __slots__ = ("_title", "_stars", "_year", "_production", "_director")
 
     def __init__(self, title :str=None, stars: List[Person]=None,
-        year:int =None, production: str=None, director: str=None):
+        year:int =None, production: str=None, director: Person=None):
         """Initialize a movie object.
         
         @param title: movie title
@@ -40,37 +40,47 @@ class Movie:
 
     @property
     def title(self) -> str:
+        """Return movie title"""
         return self._title
 
     def set_title(self, title: str) -> None:
+        """Set movie title."""
         self._title = title
 
     @property
     def stars(self) -> List[str]:
+        """Return movie stars list."""
         return self._stars
 
     def add_stars(self, stars: List(Person)) -> None:
+        """Add (a) star(s) to movie stars list."""
         self._stars.extend(list(stars))
 
     @property
     def year(self) -> int:
+        """Return movie production year."""
         return self._year
 
     def set_year(self, year:int) -> None:
+        """Set movie production year"""
         self._year = year
 
     @property
     def production(self) -> str:
+        """Return movie production company."""
         return self._production
 
     def set_production(self, production: str) -> None:
+        """Set movie production company."""
         self._production = production
 
     @property
-    def director(self) -> str:
+    def director(self) -> Person:
+        """Return movie director"""
         return self._director
 
-    def set_director(self, director:str) -> None:
+    def set_director(self, director: Person) -> None:
+        """Set movie director"""
         self._director = director
 
     def __str__(self) -> str:
