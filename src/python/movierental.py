@@ -217,6 +217,10 @@ class RentalOffice:
         """Return Rental Office current manager."""
         return self._manager
 
+    @property
+    def movies(self):
+        return self._movies
+
     @manager.setter
     def manager(self, name: Person):
         """Set current Rental Office manager."""
@@ -346,8 +350,25 @@ def _checkout(rent:RentalOffice, movie: Movie, customer: Customer) -> None:
     rent.handle(movie, customer, RentStatus.CHECKOUT)
 
 
-def main():
+def _show(obj: RentalOffice):
+    print("")
+    #movies
+
+
+def _disp():
     pass
+
+
+def _add():
+    pass
+
+
+def main():
+    print("------------------------------")
+    print("    MOVIE RENTAL OFFICE       ")
+    print("------------------------------")
+    print("                              ")
+    print("Operations commands")
 
 
 if __name__ == "__main__":
