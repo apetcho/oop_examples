@@ -38,7 +38,7 @@ Rectangle::Rectangle(int x, int y, int w, int h){
 
 // **
 void Rectangle::draw(){
-    std::cout << "[Rectangle] Width = " << width
+    std::cout << "(C++)[Rectangle] Width = " << width
         << ", Height = " << height
         << " at position (" << x << ", " << y << ")"
         << std::endl;
@@ -48,7 +48,7 @@ void Rectangle::draw(){
 void Rectangle::moveto(int x, int y){
     this->x = x;
     this->y = y;
-    std::cout << "Moving the rectangle to (" << x << ", " << y << ")!"
+    std::cout << "(C++) Moving the rectangle to (" << x << ", " << y << ")!"
         << std::endl;
 }
 
@@ -61,7 +61,7 @@ private:
 public:
     Circle(int x, int y, int radius);
     virtual void draw();
-    virtual void moveto();
+    virtual void moveto(int x, int y);
     int getx(){ return this->x; }
     int gety(){ return this->y; }
     int get_radius(){ return this->radius; }
@@ -79,8 +79,15 @@ Circle::Circle(int x, int y, int radius){
 
 // ***
 void Circle::draw(){
-    std::cout << "[Circle] Radius = " << radius
+    std::cout << "(C++) [Circle] Radius = " << radius
         << " at position (" << x << ", " << y << ")"
         << std::endl;
 }
 
+// ***
+void Circle::moveto(int x, int y){
+    this->x = x;
+    this->y = y;
+    std::cout << "(C++) Moving the circle to (" << x << ", " << y << ")!"
+        << std::endl;
+}
