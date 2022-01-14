@@ -43,3 +43,11 @@ void Rectangle::draw(){
         << " at position (" << x << ", " << y << ")"
         << std::endl;
 }
+
+// ***
+void Rectangle::moveto(int x, int y){
+    this->x = x;
+    this->y = y;
+    std::cout << "Moving the rectangle to (" << x << ", " << y << ")!"
+        << std::endl;
+}
