@@ -143,3 +143,17 @@ struct CircleFunTable{
         .destroy = Circle_destroy,
     }
 };
+
+struct Shape* Circle_new(int x, int y, int radius){
+    puts("[C] Creating a new circle");
+    struct Circle* object = (struct Circle*)malloc(
+        sizeof(struct Circle));
+    object->super.funTable = (struct ShapeFunTable*)&circleFunTable;
+    object->x = x;
+    object->y = y;
+    object->radius = radius;
+    PRINT_CIRCLE(object);
+    puts("[C] Done!");
+
+    return (struct Shape*)object;
+}
