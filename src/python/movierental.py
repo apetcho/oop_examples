@@ -440,10 +440,32 @@ def main():
             if not ok:
                 return
             _checkin(app, movie, customer)
-
-
         if cmd[:2] == "co":
-            pass
+            print("Enter your personal information")
+            customer = _read_customer()
+            print("Enter the movie's details")
+            movie = _read_movie()
+            ok = False
+            for entry in app.movies:
+                _movie: Movie = entry.movie
+                cond1 = movie.title == _movie.title
+                cond2 = (movie.director == _movie.director)
+                if  cond1 and cond2:
+                    ok = True
+                    break
+                else:
+                    ok = False
+            if  not ok:
+                print("This movie is not in our catalog")
+                return
+            ok = False
+            for entry in app.customers:
+                if entry.email == email and entry.name == name:
+                    ok = True
+                    break
+            if not ok:
+                app.add_customer(customer)
+            _checkout(app, movie, customer)
         if cmd[:2] == "sh":
             pass
         if cmd[:2] == "di":
