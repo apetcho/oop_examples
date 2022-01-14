@@ -9,6 +9,9 @@ This program model a movie rental office (shope). The main components are:
 """
 from typing import List
 from enum import Enum, auto
+from collections import namedtuple
+
+Person = namedtuple("Person", "fname lname")
 
 
 class RentStatus(Enum):
@@ -19,10 +22,9 @@ class RentStatus(Enum):
 
 class Movie:
     """Movie class."""
-    __slots__ = ("_title", "_stars", "_year", "_production",
-         "_director", "_count")
+    __slots__ = ("_title", "_stars", "_year", "_production", "_director")
 
-    def __init__(self, title :str=None, stars: List[str]=None,
+    def __init__(self, title :str=None, stars: List[Person]=None,
         year:int =None, prodco: str=None, director: List=None):
         """Initialize a movie object.
         
@@ -35,37 +37,23 @@ class Movie:
         self._year = year
         self._production = prodco
         self._director = director
-        self._count = 0
-
-    @property
-    def status(self) -> bool:
-        pass
-
-    @status.setter
-    def status(self, flag:bool):
-        pass
-
-    @property
-    def count(self) -> int:
-        pass
-
-    @count.setter
-    def count(self, flag: RentStatus):
-        pass
 
     @property
     def title(self) -> str:
-        pass
+        return self._title
 
     def set_title(self, title: str) -> None:
         pass
+        #self._title = title
 
     @property
     def stars(self) -> List[str]:
         pass
+        #return self._stars
 
-    def set_stars(self, start:List) -> None:
+    def add_stars(self, star: Person) -> None:
         pass
+        #self._stars.append(star)
 
     @property
     def year(self) -> int:
