@@ -91,7 +91,8 @@ class Circle(Shape):
         self._radius = radius
 
     def __str__(self):
-        pass
+        """String representation of a Circle object."""
+        return f"<circle cx={self._x} cy={self._y} radius={self._radius}>"
 
     def draw(self):
         pass
