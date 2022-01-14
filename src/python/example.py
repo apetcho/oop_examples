@@ -63,7 +63,10 @@ class Rectangle(Shape):
         self._height = value
 
     def draw(self):
-        pass
+        """Draw a rectangle"""
+        print("[Python] Drawing")
+        print(self)
+        print("[Python] Done!")
 
     def moveto(self, x, y):
         pass
