@@ -54,3 +54,17 @@ void Rectangle_destroy(struct Shape *object){
     Shape_destroy(object);
     free(object);
 }
+
+
+// ***
+struct RectangleFunTable{
+    struct ShapeFunTable super;
+    void (*set_width)(struct Shape* object, int width);
+} rectangleFunTable = {
+    .super = {
+        .draw = Rectangle_draw,
+        .moveto = Rectangle_moveto,
+        .destroy = Rectangle_destroy,
+    },
+    .set_width = Rectangle_set_width,
+};
