@@ -68,3 +68,16 @@ struct RectangleFunTable{
     },
     .set_width = Rectangle_set_width,
 };
+
+// ***
+struct Shape* Rectangle_new(int x, int y, int width, int height){
+    struct Rectangle* object = (struct Rectangle*)malloc(
+        sizeof(struct Rectangle));
+    object->super.funTable = (struct ShapeFunTable*)&rectangleFunTable;
+    object->x = x;
+    object->y = y;
+    object->width = width;
+    object->height = height;
+
+    return (struct Shape*)object;
+}
