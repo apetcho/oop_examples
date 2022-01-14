@@ -54,7 +54,7 @@ class Movie:
 
     @property
     def year(self) -> int:
-        pass
+        return self._year
 
     def set_year(self, year:int) -> None:
         pass
