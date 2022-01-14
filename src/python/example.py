@@ -76,8 +76,8 @@ class Rectangle(Shape):
         print("[Python] Moving")
         print(self)
         print("[Python] To")
-        self.x = x
-        self.y = y
+        self._x = x
+        self._y = y
         print(self)
         print("[Python] Done!")
         
@@ -86,9 +86,12 @@ class Circle(Shape):
     """Circle class."""
 
     def __init__(self, x, y, radius):
+        print("[Python] Initializing a new circle")
         self._x = x
         self._y = y
         self._radius = radius
+        print(self)
+        print("[Python] Done!")
 
     def __str__(self):
         """String representation of a Circle object."""
@@ -125,4 +128,12 @@ class Circle(Shape):
         print("[Python] Done!")
 
     def moveto(self, x, y):
-        pass
+        """Move a circle to (x, y)"""
+        print("[Python] Moving")
+        print(self)
+        print("[Python] To")
+        self._x = x
+        self._y = y
+        print(self)
+        print("[Python] Done!")
+
