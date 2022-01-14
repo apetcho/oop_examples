@@ -126,3 +126,9 @@ void Circle_moveto(struct Shape* object, int x, int y){
     PRINT_CIRCLE(circle);
     puts("[C] Done!");
 }
+
+// ***
+void Circle_destroy(struct Shape *object){
+    Shape_destroy(object);
+    free(object);
+}
