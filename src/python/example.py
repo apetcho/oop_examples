@@ -20,10 +20,13 @@ class Rectangle(Shape):
     """Rectangle class."""
 
     def __init__(self, x, y, width, height):
+        print("[Python] Creating rectanle")
         self._x = x
         self._y = y
         self._width = width
         self._height = height
+        print(self)
+        print("[Python] Done!")
 
     def __str__(self):
         """String representation of Rectangle object."""
@@ -69,4 +72,12 @@ class Rectangle(Shape):
         print("[Python] Done!")
 
     def moveto(self, x, y):
-        pass
+        """Move Rectangle to (x, y)"""
+        print("[Python] Moving")
+        print(self)
+        print("[Python] To")
+        self.x = x
+        self.y = y
+        print(self)
+        print("[Python] Done!")
+        
