@@ -7,6 +7,7 @@ This program model a movie rental office (shope). The main components are:
 - Customer: a customer class
 - RentalShop: a rental shop class
 """
+from calendar import c
 from typing import List
 from enum import Enum, auto
 from collections import namedtuple
@@ -192,8 +193,6 @@ class RentalOffice:
     """RentalOffice class."""
     __slots__ = "_movies", "_customers", "_manager"
     
-
-
     def __init__(self, manager:Person = None):
         """Initialize RentalOffice instance."""
         self._manager = manager
@@ -223,7 +222,7 @@ class RentalOffice:
         )
         self._customers.append(entry)
 
-    def add_movies(self, movie: Movie) -> None:
+    def add_movie(self, movie: Movie) -> None:
         """Add a new movie to movie database."""
         found = False
         for entry in self._movies:
@@ -238,7 +237,45 @@ class RentalOffice:
     def handle(self, movie: Movie, customer: Customer,
         status: RentStatus ) -> None:
         """Handle movie checkin and checkout for a given customer."""
-        pass
+        for entry in self._movies:
+            if status == RentStatus.CHECKIN:
+                if movie == entry.movie:
+                    me = entry
+                    entry = entry._asdict()
+                    entry["count"] += 1
+                    newentry = MovieEntry(
+                        count=entry["count"], movie=entry["movie"]
+                    )
+                    try:
+                        self._movies.remove(me)
+                    except ValueError:
+                        pass
+                    self._movies.append(newentry)
+                    for ce in self._customers:
+                        if ce.uid == customer.uid:
+                            try:
+                                customer.movies.remove(movie)
+                            except ValueError:
+                                pass
+                            break
+                    break
+            elif status == RentStatus.CHECKOUT:
+                me = entry
+                if movie == entry.movie:
+                    entry = entry._asdict()
+                    entry["count"] -= 1
+                    newentry = MovieEntry(
+                        count=entry["count"], movie=entry["movie"]
+                    )
+                    try:
+                        self._movies.remove(me)
+                    except ValueError:
+                        pass
+                    self._movies.append(newentry)
+                    for ce in self._customers:
+                        if ce.uid == customer.uid:
+                            customer.movies.append(movie)
+                    break
 
 
     def _load_movies(self):
