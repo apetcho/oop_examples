@@ -86,7 +86,9 @@ class Circle(Shape):
     """Circle class."""
 
     def __init__(self, x, y, radius):
-        pass
+        self._x = x
+        self._y = y
+        self._radius = radius
 
     def __str__(self):
         pass
