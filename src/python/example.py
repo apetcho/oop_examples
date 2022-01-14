@@ -137,3 +137,24 @@ class Circle(Shape):
         print(self)
         print("[Python] Done!")
 
+
+def handle_shape(shape):
+    """Handle shape polymorphically"""
+    print("[Python] --- Polymorphism in action ---")
+    shape.moveto(0, 0)
+    print("[Python] Done!")
+
+
+def main():
+    shapes = []
+    shapes.append(Rectangle(20, 12, 123, 321))
+    shapes.append(Circle(21, 12, 2022))
+    for shape in shapes:
+        shape.draw()
+        handle_shape(shape)
+
+    # accessing rectangle specific data
+    rect = Rectangle(1, 2, 3, 4)
+    rect.width = 5
+    rect.draw(rect)
+    
