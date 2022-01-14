@@ -23,6 +23,7 @@ class Shape(ABC):
 
 class Rectangle(Shape):
     """Rectangle class."""
+    __slots__ = ("_x", "_y", "_width", "_height")
 
     def __init__(self, x, y, width, height):
         print("[Python] Creating rectanle")
@@ -39,19 +40,19 @@ class Rectangle(Shape):
             f"width={self._width} height={self._height}>")
 
     @property
-    def x(self):
+    def llx(self):
         return self._x
 
-    @x.setter
-    def x(self, value):
+    @llx.setter
+    def llx(self, value):
         self._x = value
 
     @property
-    def y(self):
+    def lly(self):
         return self._y
 
-    @y.setter
-    def y(self, value):
+    @lly.setter
+    def lly(self, value):
         self._y = value
 
     @property
@@ -113,19 +114,19 @@ class Circle(Shape):
         return f"<circle cx={self._x} cy={self._y} radius={self._radius}>"
 
     @property
-    def x(self):
+    def cx(self):
         return self._x
 
-    @x.setter
-    def x(self, value):
+    @cx.setter
+    def cx(self, value):
         self._x = value
 
     @property
-    def y(self):
+    def cy(self):
         return self._y
 
-    @y.setter
-    def y(self, value):
+    @cy.setter
+    def cy(self, value):
         self._y = value
 
     @property
@@ -150,6 +151,15 @@ class Circle(Shape):
         self._x = x
         self._y = y
         print(self)
+        print("[Python] Done!")
+
+    def __del__(self):
+        """"""
+        print("[Python] Calling del on")
+        print(self)
+        self._x = None
+        self._y = None
+        self._radius = None
         print("[Python] Done!")
 
 
