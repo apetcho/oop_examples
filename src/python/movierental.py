@@ -111,8 +111,8 @@ class Customer:
     def __init__(self, fname: str=None, lname: str=None, email: str=None):
         """Initialize Customer object.
         
-        @param fname: customer's firstname
-        @param lname: customer's lastname
+        @param fname: customer's first name
+        @param lname: customer's last name
         @param email: customer's email"""
         self._name = Person(fname=fname, lname=lname)
         self._email = email
@@ -120,11 +120,17 @@ class Customer:
         self._cid = uuid.uuid4()
 
     @property
-    def name(self) -> str:
-        pass
+    def name(self) -> Person:
+        """Return customer's name"""
+        return self._name
 
     def set_name(self, fn: str, ln:str) -> None:
-        pass
+        """Set customer name.
+
+        @param fn: customer's first name
+        @param ln: customer's last name
+        """
+        self._name = Person(fname=fn, lname=ln)
 
     @property
     def email(self) -> str:
