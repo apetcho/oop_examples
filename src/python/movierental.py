@@ -14,6 +14,8 @@ import uuid
 
 
 Person = namedtuple("Person", "fname lname")
+MovieEntry = namedtuple("MovieEntry", "count movie")
+CustomerEntry = namedtuple("CustomerEntry", "name email uid movies")
 
 
 class RentStatus(Enum):
@@ -189,14 +191,14 @@ class Customer:
 class RentalOffice:
     """RentalOffice class."""
     __slots__ = "_movies", "_customers", "_manager"
-    MovieItem = namedtuple("MovieItem", "count movie")
+    
 
 
     def __init__(self, manager:Person = None):
         """Initialize RentalOffice instance."""
         self._manager = manager
-        self._movies: List[RentalOffice.MovieItem] = []
-        self._customers: List[tuple] = []
+        self._movies: List[MovieEntry] = []
+        self._customers: List[CustomerEntry] = []
         self._load_movies()
         self._load_customers()
 
@@ -211,16 +213,24 @@ class RentalOffice:
         self._manager = name
 
     def add_customer(self, customer: Customer) -> None:
-        pass
+        """Add a customer."""
+        movies = customer.movies
+        email = customer.email
+        uid = customer.uid
+        name = customer.name
+        entry = CustomerEntry(
+            name=name, email=email, movies=movies, uid=uid
+        )
+        self._customers.append(entry)
 
     def add_movies(self, movie: Movie) -> None:
         pass
 
-    def checkin(self, movie: Movie, customer: Customer) -> None:
+    def handle(self, movie: Movie, customer: Customer,
+        status: RentStatus ) -> None:
+        """Handle movie checkin and checkout for a given customer."""
         pass
 
-    def checkout(self, movie: Movie, customer: Customer) -> None:
-        pass
 
     def _load_movies(self):
         pass
