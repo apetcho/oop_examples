@@ -24,3 +24,11 @@ struct Rectangle {
     int width;
     int height;
 };
+
+// ***
+void Rectangle_draw(struct Shape* object){
+    struct Rectangle *rect = (struct Rectangle*)object;
+
+    printf("(C) [Rectangle] Width = %d, Height = %d, at position (%d, %d)!\n",
+        rect->width, rect->height, rect->x, rect->y);
+}
