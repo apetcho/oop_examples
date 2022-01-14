@@ -14,3 +14,16 @@ class Shape(ABC):
     def moveto(self, x, y):
         """Move a shape to (x, y)."""
         pass
+
+
+class Rectangle(Shape):
+    """Rectangle class."""
+
+    def __init__(self, x, y, width, height):
+        pass
+
+    def draw(self):
+        pass
+
+    def moveto(self, x, y):
+        pass
