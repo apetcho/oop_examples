@@ -29,8 +29,8 @@ struct Rectangle {
 void Rectangle_draw(struct Shape* object){
     struct Rectangle *rect = (struct Rectangle*)object;
 
-    printf(" C>> <Rectangle> Width = %d, Height = %d, at position (%d, %d)!\n",
-        rect->width, rect->height, rect->x, rect->y);
+    printf(" C>> Drawing <Rectangle llx=%d lly=%d width=%d height=%d>\n",
+        rect->x, rect->y, rect->width, rect->height);
 }
 
 // ***
@@ -39,8 +39,8 @@ void Rectangle_moveto(struct Shape* object, int x, int y){
     rect->x = x;
     rect->y = y;
 
-    printf("  C>> <Rectangle> Moving the rectangle to (%d, %d)\n",
-        rect->x, rect->y);
+    printf("  C>> Moving <Rectangle llx=%d lly=%d width=%d height=%d>\n",
+        rect->x, rect->y, rect->width, rect->height);
 }
 
 // **
@@ -89,3 +89,10 @@ struct Circle{
     int x, y;
     int radius;
 };
+
+// ***
+void Circle_draw(struct Shape* object){
+    struct Circle* circle = (struct Circle*) object;
+    printf("  C>> Drawing <Circle cx=%d cy=%d radius=%d>\n",
+        circle->x, circle->y, circle->radius);
+}
