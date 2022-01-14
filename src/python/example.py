@@ -182,4 +182,8 @@ def main():
     rect = Rectangle(1, 2, 3, 4)
     rect.width = 5
     rect.draw(rect)
+    del rect
+
+    for shape in shapes:
+        del shape
 
