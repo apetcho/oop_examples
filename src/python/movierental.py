@@ -355,8 +355,15 @@ def _checkout(rent:RentalOffice, movie: Movie, customer: Customer) -> None:
 
 
 def _show(obj: RentalOffice):
-    print("")
-    #movies
+    movies = obj.movies
+    dash = "=" * 40
+    print(f"{dash}")
+    print(" Index | Count | Movie ")
+    print(f"{dash}")
+    for i, movie in enumerate(movies):
+        count = movie.count
+        line = f"{(i+1):5d} | {count:5d} | {movie!r} "
+        print(f"{line}")
 
 
 def _disp():
