@@ -51,3 +51,21 @@ void Rectangle::moveto(int x, int y){
     std::cout << "Moving the rectangle to (" << x << ", " << y << ")!"
         << std::endl;
 }
+
+/** Circle class */
+class Circle : public Shape {
+private:
+    int x, y;
+    int radius;
+
+public:
+    Circle(int x, int y, int radius);
+    virtual void draw();
+    virtual void moveto();
+    int getx(){ return this->x; }
+    int gety(){ return this->y; }
+    int get_radius(){ return this->radius; }
+    void setx(int x){ this->x = x; }
+    void sety(int y){ this->y = y; }
+    void set_radius(int radius ){ this->radius = radius; }
+};
