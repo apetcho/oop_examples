@@ -97,3 +97,29 @@ void handle_shape(Shape* shape){
     std::cout << "handle_shape():: moving to the corner!" << std::endl;
     shape->moveto(0, 0);
 }
+
+
+// -------------
+//  Main Driver
+// -------------
+int main(){
+    // using shapes polymorphically 
+    Shape* shapes[2];
+    shapes[0] = new Rectangle(20, 12, 123, 321);
+    shapes[1] = new Circle(21, 12, 2022);
+
+    for(int i=0; i < 2; i++){
+        shapes[i]->draw();
+        handle_shape(shapes[i]);
+    }
+
+    // access a specific class function
+    Rectangle* rect = new Rectangle(1, 2, 3, 4);
+    rect->set_width(5);
+    rect->draw();
+
+    delete rect;
+    delete [] shapes;
+
+    return 0;
+}
