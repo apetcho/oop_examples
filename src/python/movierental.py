@@ -276,13 +276,7 @@ class RentalOffice:
                     except ValueError:
                         pass
                     self._movies.append(newentry)
-                    for ce in self._customers:
-                        if ce.uid == customer.uid:
-                            try:
-                                customer.movies.remove(movie)
-                            except ValueError:
-                                pass
-                            break
+                    customer.delmovie(movie)
                     break
             elif status == RentStatus.CHECKOUT:
                 me = entry
@@ -297,9 +291,7 @@ class RentalOffice:
                     except ValueError:
                         pass
                     self._movies.append(newentry)
-                    for ce in self._customers:
-                        if ce.uid == customer.uid:
-                            customer.movies.append(movie)
+                    customer.addmovie(movie)
                     break
 
 
@@ -364,10 +356,35 @@ def _show(obj: RentalOffice):
         count = movie.count
         line = f"{(i+1):5d} | {count:5d} | {movie!r} "
         print(f"{line}")
+    print()
+    customers = obj.customers
+    dash = "*" * 50
+    email = "Email"
+    name = "Name"
+    color = "\x1b[3;32m"
+    reset = "\x1b[0m"
+    header = color + f" Index | {email:<15s} | {name:<24s} " + reset
+    print(f"{dash}")
+    print(header)
+    print(f"{dash}")
+    for i, customer in enumerate(customers):
+        email = customer.email
+        name = customer.name
+        print(f" {(i+1):<5d} | {email:<15s} | {name:<24s} ")
 
 
-def _disp():
-    pass
+def _disp(customer: Customer):
+    name = f"{customer:s}"
+    dash = "-" * len(name)
+    color = "\x1b[3;36m"
+    reset = "\x1b[0m"
+    print(dash)
+    print(f"{color}{name}{reset}")
+    print(dash)
+    movies = customer.movies
+    for i, movie in enumerate(movies):
+        print(f"[{(i+1):^3d}] {movie:s}")
+
 
 
 def _add():
