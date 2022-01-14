@@ -95,6 +95,7 @@ class Rectangle(Shape):
         self._y = None
         self._width = None
         self._height = None
+        print(self)
         print("[Python] Done!")
         
 
@@ -160,6 +161,7 @@ class Circle(Shape):
         self._x = None
         self._y = None
         self._radius = None
+        print(self)
         print("[Python] Done!")
 
 
@@ -181,12 +183,12 @@ def main():
     # accessing rectangle specific data
     rect = Rectangle(1, 2, 3, 4)
     rect.width = 5
-    rect.draw(rect)
+    rect.draw()
     del rect
-
+    
     for shape in shapes:
         del shape
-
+    
 
 if __name__ == "__main__":
     main()
