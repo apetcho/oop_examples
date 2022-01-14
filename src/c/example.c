@@ -4,11 +4,12 @@
 
 #define PRINT_RECT(rect)                                        \
     printf("<rectangle llx=%d lly=%d width=%d height=%d>\n",    \
-        rect->x, rect->y, rect->width, rect->height)
+        ((rect)->x), ((rect)->y), ((rect)->width), ((rect)->height))
 
 #define PRINT_CIRCLE(circle)                    \
     printf("<circle cx=%d cy=%d radius=%d>",     \
-        circle->x, circle->y, circle->radius)
+        ((circle)->x), ((circle)->y), ((circle)->radius))
+
 /* Shape abstract interface */
 struct Shape {
     struct ShapeFunTable *funTable;
@@ -156,4 +157,23 @@ struct Shape* Circle_new(int x, int y, int radius){
     puts("[C] Done!");
 
     return (struct Shape*)object;
+}
+
+
+#define SHAPE_DRAW(object)                  \
+    (((struct Shape*)(object))->funTable->draw((object)))
+
+#define SHAPE_MOVETO(object, x, y)          \
+    (((struct Shape*)(object))->funTable->moveto((object), (x), (y)))
+
+#define RECTANGLE_SETWIDTH(object, width)   \
+    ((struct RectangleFunTable*)((          \
+        struct Shape*)(object))->funTable)->set_width((object), (width))
+
+#define SHAPE_DESTROY(object)               \
+    (((struct Shape*)(object))->funTable->destroy((object)))
+
+/* A function taht uses a Shape polymophically */
+void handle_shape(struct Shape* object){
+    SHAPE_MOVETO(object, 0, 0);
 }
