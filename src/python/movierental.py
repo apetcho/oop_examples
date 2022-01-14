@@ -231,7 +231,13 @@ class RentalOffice:
         entry = CustomerEntry(
             name=name, email=email, movies=movies, uid=uid
         )
-        self._customers.append(entry)
+        already = False
+        for item in self._customers:
+            if str(item.uid) == str(customer.uid):
+                already = True
+                break
+        if not already:
+            self._customers.append(entry)
 
     def add_movie(self, movie: Movie) -> None:
         """Add a new movie to movie database."""
@@ -331,15 +337,6 @@ def _read_movie() -> Movie:
         production=_prdco, director=_dname)
     return movie
     
-
-
-def _make_movie_entry(movie: Movie) -> MovieEntry:
-    pass
-
-
-def _make_customer_entry(customer: Customer) -> CustomerEntry:
-    pass
-
 
 def _checkin(movie: Movie, customer: Customer) -> None:
     pass
