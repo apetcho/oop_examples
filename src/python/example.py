@@ -25,6 +25,11 @@ class Rectangle(Shape):
         self._width = width
         self._height = height
 
+    def __str__(self):
+        """String representation of Rectangle object."""
+        return (f"<rectangle llx={self._x} lly={self._y} "
+            f"width={self._width} height={self._height}>")
+
     def draw(self):
         pass
 
