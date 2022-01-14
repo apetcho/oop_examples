@@ -46,6 +46,14 @@ class Rectangle(Shape):
     def y(self, value):
         self._y = value
 
+    @property
+    def width(self):
+        return self._width
+
+    @width.setter
+    def width(self, value):
+        self._width = value
+
     def draw(self):
         pass
 
