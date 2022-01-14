@@ -133,3 +133,40 @@ class Customer:
 
     def __repr__(self):
         pass
+
+
+class RentalOffice:
+    """RentalOffice class."""
+    __slots__ = "_movies", "_customers", "_manager"
+
+    def __init__(self, manager:str):
+        pass
+
+    def add_customer(self, customer: Customer) -> None:
+        pass
+
+    def add_movies(self, movie: Movie) -> None:
+        pass
+
+    def checkin(self, movie: Movie, customer: Customer) -> None:
+        pass
+
+    def checkout(self, movie: Movie, customer: Customer) -> None:
+        pass
+
+    def _load_movies(self):
+        pass
+
+    def _load_customers(self):
+        pass
+
+    def close_session(self):
+        pass
+
+
+def main():
+    pass
+
+
+if __name__ == "__main__":
+    main()
