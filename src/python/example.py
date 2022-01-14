@@ -110,6 +110,14 @@ class Circle(Shape):
     def y(self, value):
         self._y = value
 
+    @property
+    def radius(self):
+        return self._radius
+
+    @radius.setter
+    def radius(self, value):
+        self._radius = value
+
     def draw(self):
         pass
 
