@@ -81,3 +81,18 @@ class Rectangle(Shape):
         print(self)
         print("[Python] Done!")
         
+
+class Circle(Shape):
+    """Circle class."""
+
+    def __init__(self, x, y, radius):
+        pass
+
+    def __str__(self):
+        pass
+
+    def draw(self):
+        pass
+
+    def moveto(self, x, y):
+        pass
