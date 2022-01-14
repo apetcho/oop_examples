@@ -134,11 +134,12 @@ class Customer:
 
     @property
     def email(self) -> str:
-        """Return custormer's email"""
+        """Return customer's email"""
         return self._email
 
     def set_email(self, email:str) -> None:
-        pass
+        """Set customer's email."""
+        self._email = email
 
     @property
     def customer_id(self) -> str:
