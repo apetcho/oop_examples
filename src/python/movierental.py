@@ -398,7 +398,58 @@ def main():
     print("    MOVIE RENTAL OFFICE       ")
     print("------------------------------")
     print("                              ")
-    print("Operations commands")
+    print("Use one of the following commands to operate at the desk :)")
+    print("                              ")
+    print("(am) Add movie to the database")
+    print("(re) Register a customer      ")
+    print("(ci) Check-in for a movie     ")
+    print("(co) Checkout for a movie     ")
+    print("(sh) Show the database content")
+    print("(di) Show the customer movies ")
+    print("(q)  Quit")
+    app = RentalOffice()
+    app.manager = "John Doe"
+    while True:
+        cmd = input(f"{PROMPT}").lower()
+        if cmd[:2] == "am":
+            movie = _read_movie()
+            app.addmovie(movie)
+        if cmd[:2] == "re":
+            customer = _read_customer()
+            app.add_customer(customer)
+        if cmd[:2] == "ci":
+            print("Enter your personal information")
+            customer = _read_customer()
+            title = input(f"Enter the movie title\n{PROMPT}")
+            name = customer.name
+            email = customer.email
+            for entry in app.movies:
+                movie: Movie = entry.movie
+                if movie.title == title:
+                    break
+                else:
+                    movie = None
+            if movie is None:
+                print("This movie is not from our catalog")
+                return
+            ok = False
+            for entry in app.customers:
+                if entry.email == email and entry.name == name:
+                    ok = True
+                    break
+            if not ok:
+                return
+            _checkin(app, movie, customer)
+
+
+        if cmd[:2] == "co":
+            pass
+        if cmd[:2] == "sh":
+            pass
+        if cmd[:2] == "di":
+            pass
+        if cmd[0] == "q":
+            pass
 
 
 if __name__ == "__main__":
