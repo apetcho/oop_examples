@@ -81,3 +81,11 @@ struct Shape* Rectangle_new(int x, int y, int width, int height){
 
     return (struct Shape*)object;
 }
+
+
+/** Circle class */
+struct Circle{
+    struct Shape super;
+    int x, y;
+    int radius;
+};
