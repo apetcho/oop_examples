@@ -341,10 +341,10 @@ def _read_movie() -> Movie:
 def _checkin(rent:RentalOffice, movie: Movie, customer: Customer) -> None:
     rent.handle(movie, customer, RentStatus.CHECKIN)
 
-""" 
+
 def _checkout(rent:RentalOffice, movie: Movie, customer: Customer) -> None:
-    rent.handle(movie, customer, RentStatus.C)
- """
+    rent.handle(movie, customer, RentStatus.CHECKOUT)
+
 
 def main():
     pass
