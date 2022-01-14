@@ -5,6 +5,7 @@ class Shape {
 public:
     virtual void draw() = 0;
     virtual void moveto(int x, int y) = 0;
+    virtual ~Shape(){};
 };
 
 /* Rectangle class */
@@ -26,7 +27,7 @@ public:
     void set_height(int h){ this->height = h; }
     virtual void draw();
     virtual void moveto(int x, int y);
-    ~Rectangle(){
+    virtual ~Rectangle(){
         std::cout << "[C++] Destroying" << std::endl;
         std::cout << "<rectangle llx=" << this->x << " lly=" << this->y
             << " width="<< this->width
@@ -88,7 +89,7 @@ public:
     void setx(int x){ this->x = x; }
     void sety(int y){ this->y = y; }
     void set_radius(int radius ){ this->radius = radius; }
-    ~Circle(){
+    virtual ~Circle(){
         std::cout << "[C++] Destroying" << std::endl;
         std::cout << "<circle cx=" << this->x << " cy=" << this->y
             << " radius=" << this->radius << ">" << std::endl;
@@ -157,7 +158,9 @@ int main(){
     rect->draw();
 
     delete rect;
-    delete [] shapes;
+    for(auto shape: shapes){
+        delete shape;
+    }
 
     return 0;
 }

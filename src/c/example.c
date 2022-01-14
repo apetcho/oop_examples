@@ -6,8 +6,8 @@
     printf("<rectangle llx=%d lly=%d width=%d height=%d>\n",    \
         ((rect)->x), ((rect)->y), ((rect)->width), ((rect)->height))
 
-#define PRINT_CIRCLE(circle)                    \
-    printf("<circle cx=%d cy=%d radius=%d>",     \
+#define PRINT_CIRCLE(circle)                        \
+    printf("<circle cx=%d cy=%d radius=%d>\n",      \
         ((circle)->x), ((circle)->y), ((circle)->radius))
 
 /* Shape abstract interface */
@@ -167,17 +167,20 @@ struct Shape* Circle_new(int x, int y, int radius){
 
 
 #define SHAPE_DRAW(object)                  \
-    (((struct Shape*)(object))->funTable->draw((object)))
+    (((struct Shape*)(object))->funTable->draw((struct Shape*)(object)))
 
-#define SHAPE_MOVETO(object, x, y)          \
-    (((struct Shape*)(object))->funTable->moveto((object), (x), (y)))
+#define SHAPE_MOVETO(object, x, y)                  \
+    (((struct Shape*)(object))->funTable->moveto(   \
+        (struct Shape*)(object), (x), (y)))
 
-#define RECTANGLE_SETWIDTH(object, width)   \
-    ((struct RectangleFunTable*)((          \
-        struct Shape*)(object))->funTable)->set_width((object), (width))
+#define RECTANGLE_SETWIDTH(object, width)               \
+    ((struct RectangleFunTable*)((                      \
+        struct Shape*)(object))->funTable)->set_width(  \
+            (struct Shape*)(object), (width))
 
-#define SHAPE_DESTROY(object)               \
-    (((struct Shape*)(object))->funTable->destroy((object)))
+#define SHAPE_DESTROY(object)                       \
+    (((struct Shape*)(object))->funTable->destroy(  \
+        (struct Shape*)(object)))
 
 /* A function taht uses a Shape polymophically */
 void handle_shape(struct Shape* object){
@@ -201,7 +204,7 @@ int main(){
     }
 
     /* accessing Rectangle specific data */
-    struct Rectangle* rect = Rectangle_new(1, 2, 3, 4);
+    struct Rectangle* rect = (struct Rectangle*)Rectangle_new(1, 2, 3, 4);
     RECTANGLE_SETWIDTH(rect, 5);
     SHAPE_DRAW(rect);
     SHAPE_DESTROY(rect);
