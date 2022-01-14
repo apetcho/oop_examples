@@ -102,8 +102,7 @@ class Movie:
         retval = (
             f"Movie(title={self._title}, stars=[{self._stars[0]}, ...], "
             f"year={self._year}, production={self._production}, "
-            f"director={self._director})"
-        )
+            f"director={self._director})")
         return retval
 
 
