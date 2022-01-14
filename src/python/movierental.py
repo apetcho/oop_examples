@@ -25,7 +25,7 @@ class Movie:
     __slots__ = ("_title", "_stars", "_year", "_production", "_director")
 
     def __init__(self, title :str=None, stars: List[Person]=None,
-        year:int =None, prodco: str=None, director: List=None):
+        year:int =None, production: str=None, director: str=None):
         """Initialize a movie object.
         
         @param title: movie title
@@ -33,9 +33,9 @@ class Movie:
         @param year: year of production
         @param prodco: production company name"""
         self._title = title
-        self._stars = stars
+        self._stars = list(stars) if stars is not None else []
         self._year = year
-        self._production = prodco
+        self._production = production
         self._director = director
 
     @property
@@ -49,9 +49,8 @@ class Movie:
     def stars(self) -> List[str]:
         return self._stars
 
-    def add_stars(self, star: Person) -> None:
-        pass
-        #self._stars.append(star)
+    def add_stars(self, stars: List(Person)) -> None:
+        self._stars.extend(list(stars))
 
     @property
     def year(self) -> int:
