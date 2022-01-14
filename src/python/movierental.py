@@ -310,8 +310,15 @@ class RentalOffice:
             self._movies = []
             self._movies.append(Movie(title, _stars, year, _prod, _dir))
 
-    def _load_customers(self):
-        pass
+    def _load_customers(self, filename):
+        import json
+        with open(filename, "r") as fp:
+            customers = json.load(fp)
+            for customer in customers:
+                fname = customer[0]
+                lname = customer[1]
+                email = customer[2]
+                self._customers.append(Customer(fname, lname, email))
 
     def close_session(self):
         pass
