@@ -141,13 +141,32 @@ struct CustomerVTable{
     Customer* (*create)(void);
     void (*destroy)(Customer*);
     char* (*to_string)(Customer*);
-    void (*print)(Customer*);
+    void (*print)(const Customer*);
     size_t (*fget)(FILE*, Customer*);
     size_t (*fput)(FILE*, const Customer*);
     Person* (*get_info)(const Customer*);
     Vector* (*get_movies)(const Customer*);
-    void (*set_info)(Customer*);
-    void (*set_movies)(Customer*);
+    void (*set_info)(Customer*, Person*);
+    void (*set_movies)(Customer*, Vector*);
+};
+
+const CustomerVTable _cvtable = {
+    .create = Customer_create,
+    .destroy = Customer_destroy,
+    .to_string = Customer_to_string,
+    .print = Customer_print,
+    .fget = Customer_fget,
+    .fput = Customer_fput,
+    .get_info = Customer_get_info,
+    .get_movies = Customer_get_movies,
+    .set_info = Customer_set_info,
+    .set_movies = Customer_set_movies,
+};
+
+struct Customer{
+    CustomerVTable *super;
+    Person* info;
+    Vector* movies;
 };
 
 // AbstractObject abstract class
