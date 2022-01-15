@@ -71,6 +71,18 @@ void Person_set_first_name(Person*, const char*);
 void Person_set_last_name(Person*, const char*);
 void Person_set_email(Person*, const char*);
 
+struct PersonVTable{
+    Person* (*create)(void);
+    void (*destroy)(Person*);
+    char* (*to_string)(Person*);
+    void (*print)(Person*);
+    size_t (*fget)(FILE*, Person*);
+    size_t (*fput)(FILE*, const Person*);
+    char* (*first_name)(const Person*);
+    char* (*last_name)(const Person*);
+    char* (*email)(const Person*);
+};
+
 // Movie class
 Movie* Movie_create();
 void Movie_destroy(Movie*);
