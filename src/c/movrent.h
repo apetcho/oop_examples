@@ -47,6 +47,22 @@ void Person_set_last_name(Person*);
 void Person_set_email(Person*);
 
 // Movie class
+Movie* Movie_create();
+void Movie_destroy(Movie*);
+char* Movie_to_string(Movie*);
+void Movie_print(const Movie*);
+size_t Movie_fget(FILE*, Movie*);
+size_t Movie_fput(FILE*, const Movie*);
+char* Movie_get_title(const Movie*);
+char* Movie_get_year(const Movie*);
+char* Movie_get_production(const Movie*);
+Person* Movie_get_director(const Movie*);
+Vector Movie_get_stars(const Movie*);
+void Movie_set_title(Movie*);
+void Movie_set_year(Movie*);
+void Movie_set_production(Movie*);
+void Movie_set_director(Movie*);
+void Movie_set_stars(Movie*);
 
 // Customer class
 
