@@ -4,6 +4,11 @@
 #include<stdio.h>
 #include<assert.h>
 
+
+typedef struct {
+    FILE *fp;
+}File;
+
 /** Forward declaration of VTables */
 typedef struct VectorVTable VectorVTable;
 typedef struct PersonVTable PersonVTable;
@@ -39,9 +44,14 @@ size_t Vector_get_capacity(const Vector*);
 void Vector_set_capacity(Vector*, size_t);
 char* Vector_to_string(const Vector*);
 void Vector_print(const Vector*);
-size_t Vector_fget(FILE*, Vector*);
-size_t Vector_fput(FILE*, const Vector*);
+size_t Vector_fget(File*, Vector*);
+size_t Vector_fput(File*, const Vector*);
 void Vector_clear(Vector*);
+void Vector_push_back(Vector*, Object*);
+Object* Vector_pop_back(Vector*);
+void Vector_foreach(Vector*, ForeachCallback Fn);
+
+typedef void (*ForeachCallback)(Object*);
 
 struct VectorVTable{
     Vector* (*create)(void);
@@ -53,9 +63,12 @@ struct VectorVTable{
     size_t (*get_capacity)(const Vector*);
     char* (*to_string)(const Vector*);
     void (*print)(const Vector*);
-    size_t (*fget)(FILE*, Vector*);
-    size_t (*fput)(FILE*, const Vector*);
+    size_t (*fget)(File*, Vector*);
+    size_t (*fput)(File*, const Vector*);
     void (*clear)(Vector*);
+    void (*push_back)(Vector*, Object*);
+    Object* (*pop_back)(Vector*);
+    void (*foreach)(Vector*, ForeachCallback);
 };
 
 const VectorVTable _vvtable = {
@@ -70,6 +83,9 @@ const VectorVTable _vvtable = {
     .size = Vector_get_size,
     .set_capacity = Vector_set_capacity,
     .get_capacity = Vector_get_capacity,
+    .push_back = Vector_push_back,
+    .pop_back = Vector_pop_back,
+    .foreach = Vector_foreach,
 };
 
 struct Vector{
@@ -85,8 +101,8 @@ Person* Person_create();
 void Person_destroy(Person*);
 char* Person_to_string(const Person*);
 void Person_print(const Person*);
-size_t Person_fget(FILE*, Person*);
-size_t Person_fput(FILE*, const Person*);
+size_t Person_fget(File*, Person*);
+size_t Person_fput(File*, const Person*);
 char* Person_get_first_name(const Person*);
 char* Person_get_last_name(const Person*);
 char* Person_get_email(const Person*);
@@ -99,8 +115,8 @@ struct PersonVTable{
     void (*destroy)(Person*);
     char* (*to_string)(const Person*);
     void (*print)(const Person*);
-    size_t (*fget)(FILE*, Person*);
-    size_t (*fput)(FILE*, const Person*);
+    size_t (*fget)(File*, Person*);
+    size_t (*fput)(File*, const Person*);
     void (*set_first_name)(Person*, const char*);
     void (*set_last_name)(Person*, const char*);
     void (*set_email)(Person*, const char*);
@@ -138,8 +154,8 @@ Movie* Movie_create();
 void Movie_destroy(Movie*);
 char* Movie_to_string(const Movie*);
 void Movie_print(const Movie*);
-size_t Movie_fget(FILE*, Movie*);
-size_t Movie_fput(FILE*, const Movie*);
+size_t Movie_fget(File*, Movie*);
+size_t Movie_fput(File*, const Movie*);
 char* Movie_get_title(const Movie*);
 int Movie_get_year(const Movie*);
 char* Movie_get_company(const Movie*);
@@ -156,8 +172,8 @@ struct MovieVTable{
     void (*destroy)(Movie*);
     char* (*to_string)(const Movie*);
     void (*print)(const Movie*);
-    size_t (*fget)(FILE*, Movie*);
-    size_t (*fput)(FILE*, const Movie*);
+    size_t (*fget)(File*, Movie*);
+    size_t (*fput)(File*, const Movie*);
     char* (*get_title)(const Movie*);
     int (*get_year)(const Movie*);
     char* (*get_company)(const Movie*);
@@ -206,8 +222,8 @@ Customer* Customer_create();
 void Customer_destroy(Customer*);
 char* Customer_to_string(const Customer*);
 void Customer_print(const Customer*);
-size_t Customer_fget(FILE*, Customer*);
-size_t Customer_fput(FILE*, const Customer*);
+size_t Customer_fget(File*, Customer*);
+size_t Customer_fput(File*, const Customer*);
 Person* Customer_get_info(const Customer*);
 Vector* Customer_get_movies(const Customer*);
 void Customer_set_info(Customer*, Person*);
@@ -218,8 +234,8 @@ struct CustomerVTable{
     void (*destroy)(Customer*);
     char* (*to_string)(const Customer*);
     void (*print)(const Customer*);
-    size_t (*fget)(FILE*, Customer*);
-    size_t (*fput)(FILE*, const Customer*);
+    size_t (*fget)(File*, Customer*);
+    size_t (*fput)(File*, const Customer*);
     Person* (*get_info)(const Customer*);
     Vector* (*get_movies)(const Customer*);
     void (*set_info)(Customer*, Person*);
