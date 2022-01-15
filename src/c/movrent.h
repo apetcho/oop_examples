@@ -27,12 +27,24 @@ size_t Vector_get_capacity(Vector*);
 void Vector_set_capacity(Vector*);
 char* Vector_to_string(Vector*);
 void Vector_print(const Vector*);
-size_t Vector_read(FILE*, Vector*);
-size_t Vector_write(FILE*, const Vector*);
+size_t Vector_fget(FILE*, Vector*);
+size_t Vector_fput(FILE*, const Vector*);
 void Vector_clear(Vector*);
 
 
 // Person class
+Person* Person_create();
+void Person_destroy(Person*);
+char* Person_to_string(Person*);
+void Person_print(const Person*);
+size_t Person_fget(FILE*, Person*);
+size_t Person_fput(FILE*, const Person*);
+char* Person_get_first_name(const Person*);
+char* Person_get_last_name(const Person*);
+char* Person_get_email(const Person*);
+void Person_set_first_name(Person*);
+void Person_set_last_name(Person*);
+void Person_set_email(Person*);
 
 // Movie class
 
