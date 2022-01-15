@@ -17,11 +17,22 @@ typedef struct Movie Movie;
 typedef struct Customer Customer;
 typedef struct MovieRental MovieRental;
 
+/* Type enumartion and union */
+typedef enum {
+    UNKNOWN = 0,
+    PERSON,
+    CUSTOMER,
+    MOVIE,
+    MOVIE_RENTAL,
+} ObjectEnum;
+
+typedef struct Object Object;
+
 // Generic vector class
 Vector* Vector_create();
 void Vector_destroy(Vector*);
-void* Vector_get_item(Vector*, size_t);
-void Vector_set_item(Vector*, size_t, void*);
+Object* Vector_get_item(Vector*, size_t);
+void Vector_set_item(Vector*, size_t, Object*);
 size_t Vector_get_size(Vector*);
 size_t Vector_get_capacity(Vector*);
 void Vector_set_capacity(Vector*, size_t);
@@ -30,6 +41,20 @@ void Vector_print(const Vector*);
 size_t Vector_fget(FILE*, Vector*);
 size_t Vector_fput(FILE*, const Vector*);
 void Vector_clear(Vector*);
+
+struct VectorVTable{
+    Vector* (*create)(void);
+    void (*destroy)(Vector*);
+    void (*get)(Vector*, size_t);
+    void (*set)(Vector*, size_t, Object*);
+    size_t (*size)(Vector*);
+    size_t (*capacity)(Vector*);
+    char* (*to_string)(Vector*);
+    void (*print)(Vector*);
+    size_t (*fget)(FILE*, Vector*);
+    size_t (*fput)(FILE*, const Vector*);
+    void (*clear)(Vector*);
+};
 
 
 // Person class
