@@ -109,7 +109,7 @@ struct MovieVTable{
     Movie* (*create)(void);
     void (*destroy)(Movie*);
     char* (*to_string)(Movie*);
-    void (*print)(Movie*);
+    void (*print)(const Movie*);
     size_t (*fget)(FILE*, Movie*);
     size_t (*fput)(FILE*, const Movie*);
     char* (*get_title)(const Movie*);
@@ -117,12 +117,42 @@ struct MovieVTable{
     char* (*get_company)(const Movie*);
     Person* (*get_director)(const Movie*);
     Vector* (*get_stars)(const Movie*);
-    void (*set_title)(Movie*);
-    void (*set_year)(Movie*);
-    void (*set_company)(Movie*);
-    void (*set_director)(Movie*);
-    void (*set_stars)(Movie*);
+    void (*set_title)(Movie*, const char*);
+    void (*set_year)(Movie*, int);
+    void (*set_company)(Movie*, const char*);
+    void (*set_director)(Movie*, const Person*);
+    void (*set_stars)(Movie*, const Vector*);
 };
+
+const MovieVTable _mvtable = {
+    .create = Movie_create,
+    .destroy = Movie_destroy,
+    .to_string = Movie_to_string,
+    .print = Movie_print,
+    .fget = Movie_fget,
+    .fput = Movie_fput,
+    .get_title = Movie_get_title,
+    .get_year = Movie_get_year,
+    .get_director = Movie_get_director,
+    .get_company = Movie_get_company,
+    .get_stars = Movie_get_stars,
+    .set_title = Movie_set_title,
+    .set_year = Movie_set_year,
+    .set_director = Movie_set_director,
+    .set_company = Movie_set_company,
+    .set_stars = Movie_set_stars,
+};
+
+struct Movie{
+    MovieVTable *super;
+    /**/
+    char *title;
+    Person *director;
+    int year;
+    char *company;
+    Vector* stars;
+};
+
 
 
 // Customer class
@@ -171,9 +201,9 @@ struct Customer{
 
 // AbstractObject abstract class
 typedef struct {
-    PersonVTable _pvtable;
-    MovieVTable _mvtable;
-    CustomerVTable _cvtable;
+    PersonVTable *pvtable;
+    MovieVTable *mvtable;
+    CustomerVTable *cvtable;
 } AbstractObject;
 /** Don't allow instatiation of Abstract object */
 AbstractObject* AbstractObject_create(){ assert(0);}
