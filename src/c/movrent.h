@@ -2,6 +2,7 @@
 #define _MOVIES_RENTAL_H
 #include<stddef.h>
 #include<stdio.h>
+#include<assert.h>
 
 /** Forward declaration of VTables */
 typedef struct VectorVTbale VectorVTbale;
@@ -149,9 +150,30 @@ struct CustomerVTable{
     void (*set_movies)(Customer*);
 };
 
-// MRObject abstract class
+// AbstractObject abstract class
+typedef struct {
+    PersonVTable _pvtable;
+    MovieVTable _mvtable;
+    CustomerVTable _cvtable;
+} AbstractObject;
+/** Don't allow instatiation of Abstract object */
+AbstractObject* AbstractObject_create(){ assert(0);}
+void AbstractObject_destroy(){}
 
 // MovieRental class
+struct MovieRental{
+    AbstractObject *super;
+    /**/
+    Vector* movies;
+    Vector* customers;
+    char* manager;
+};
 
+MovieRental* new_movie_rental();
+void del_movie_rental();
+Vector* load_customers(const char* filename);
+void save_customers(const char* filename);
+Vector* load_movies(const char* filename);
+void save_movies(const char* filename);
 
 #endif
