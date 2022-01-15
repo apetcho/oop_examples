@@ -5,7 +5,7 @@
 #include<assert.h>
 
 /** Forward declaration of VTables */
-typedef struct VectorVTbale VectorVTbale;
+typedef struct VectorVTable VectorVTable;
 typedef struct PersonVTable PersonVTable;
 typedef struct MovieVTable MovieVTable;
 typedef struct CustomerVTable CustomerVTable;
@@ -32,12 +32,12 @@ typedef struct Object Object;
 // Generic vector class
 Vector* Vector_create();
 void Vector_destroy(Vector*);
-Object* Vector_get_item(Vector*, size_t);
+Object* Vector_get_item(const Vector*, size_t);
 void Vector_set_item(Vector*, size_t, Object*);
-size_t Vector_get_size(Vector*);
-size_t Vector_get_capacity(Vector*);
+size_t Vector_get_size(const Vector*);
+size_t Vector_get_capacity(const Vector*);
 void Vector_set_capacity(Vector*, size_t);
-char* Vector_to_string(Vector*);
+char* Vector_to_string(const Vector*);
 void Vector_print(const Vector*);
 size_t Vector_fget(FILE*, Vector*);
 size_t Vector_fput(FILE*, const Vector*);
@@ -46,22 +46,44 @@ void Vector_clear(Vector*);
 struct VectorVTable{
     Vector* (*create)(void);
     void (*destroy)(Vector*);
-    void (*get)(Vector*, size_t);
+    Object* (*get)(const Vector*, size_t);
     void (*set)(Vector*, size_t, Object*);
-    size_t (*size)(Vector*);
-    size_t (*capacity)(Vector*);
-    char* (*to_string)(Vector*);
-    void (*print)(Vector*);
+    size_t (*size)(const Vector*);
+    void (*set_capacity)(Vector*, size_t);
+    size_t (*get_capacity)(const Vector*);
+    char* (*to_string)(const Vector*);
+    void (*print)(const Vector*);
     size_t (*fget)(FILE*, Vector*);
     size_t (*fput)(FILE*, const Vector*);
     void (*clear)(Vector*);
 };
 
+const VectorVTable _vvtable = {
+    .create = Vector_create,
+    .destroy = Vector_destroy,
+    .to_string = Vector_to_string,
+    .print = Vector_print,
+    .fput = Vector_fput,
+    .fget = Vector_fget,
+    .get = Vector_get_item,
+    .set = Vector_set_item,
+    .size = Vector_get_size,
+    .set_capacity = Vector_set_capacity,
+    .get_capacity = Vector_get_capacity,
+};
+
+struct Vector{
+    VectorVTable *super;
+    /**/
+    Object *data;
+    size_t size;
+    size_t capacity;
+};
 
 // Person class
 Person* Person_create();
 void Person_destroy(Person*);
-char* Person_to_string(Person*);
+char* Person_to_string(const Person*);
 void Person_print(const Person*);
 size_t Person_fget(FILE*, Person*);
 size_t Person_fput(FILE*, const Person*);
@@ -75,7 +97,7 @@ void Person_set_email(Person*, const char*);
 struct PersonVTable{
     Person* (*create)(void);
     void (*destroy)(Person*);
-    char* (*to_string)(Person*);
+    char* (*to_string)(const Person*);
     void (*print)(const Person*);
     size_t (*fget)(FILE*, Person*);
     size_t (*fput)(FILE*, const Person*);
@@ -114,7 +136,7 @@ struct Person {
 // Movie class
 Movie* Movie_create();
 void Movie_destroy(Movie*);
-char* Movie_to_string(Movie*);
+char* Movie_to_string(const Movie*);
 void Movie_print(const Movie*);
 size_t Movie_fget(FILE*, Movie*);
 size_t Movie_fput(FILE*, const Movie*);
@@ -132,7 +154,7 @@ void Movie_set_stars(Movie*, const Vector*);
 struct MovieVTable{
     Movie* (*create)(void);
     void (*destroy)(Movie*);
-    char* (*to_string)(Movie*);
+    char* (*to_string)(const Movie*);
     void (*print)(const Movie*);
     size_t (*fget)(FILE*, Movie*);
     size_t (*fput)(FILE*, const Movie*);
@@ -182,7 +204,7 @@ struct Movie{
 // Customer class
 Customer* Customer_create();
 void Customer_destroy(Customer*);
-char* Customer_to_string(Customer*);
+char* Customer_to_string(const Customer*);
 void Customer_print(const Customer*);
 size_t Customer_fget(FILE*, Customer*);
 size_t Customer_fput(FILE*, const Customer*);
@@ -194,7 +216,7 @@ void Customer_set_movies(Customer*, Vector*);
 struct CustomerVTable{
     Customer* (*create)(void);
     void (*destroy)(Customer*);
-    char* (*to_string)(Customer*);
+    char* (*to_string)(const Customer*);
     void (*print)(const Customer*);
     size_t (*fget)(FILE*, Customer*);
     size_t (*fput)(FILE*, const Customer*);
