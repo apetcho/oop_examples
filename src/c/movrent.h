@@ -78,9 +78,12 @@ struct PersonVTable{
     void (*print)(Person*);
     size_t (*fget)(FILE*, Person*);
     size_t (*fput)(FILE*, const Person*);
-    char* (*first_name)(const Person*);
-    char* (*last_name)(const Person*);
-    char* (*email)(const Person*);
+    char* (*set_first_name)(const Person*);
+    char* (*set_last_name)(const Person*);
+    char* (*set_email)(const Person*);
+    void (*get_first_name)(Person*);
+    void (*get_last_name)(Person*);
+    void (*get_email)(Person*);
 };
 
 // Movie class
@@ -132,6 +135,19 @@ Person* Customer_get_info(const Customer*);
 Vector* Customer_get_movies(const Customer*);
 void Customer_set_info(Customer*, Person*);
 void Customer_set_movies(Customer*, Vector*);
+
+struct CustomerVTable{
+    Customer* (*create)(void);
+    void (*destroy)(Customer*);
+    char* (*to_string)(Customer*);
+    void (*print)(Customer*);
+    size_t (*fget)(FILE*, Customer*);
+    size_t (*fput)(FILE*, const Customer*);
+    Person* (*get_info)(const Customer*);
+    Vector* (*get_movies)(const Customer*);
+    void (*set_info)(Customer*);
+    void (*set_movies)(Customer*);
+};
 
 // MRObject abstract class
 
