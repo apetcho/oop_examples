@@ -76,16 +76,40 @@ struct PersonVTable{
     Person* (*create)(void);
     void (*destroy)(Person*);
     char* (*to_string)(Person*);
-    void (*print)(Person*);
+    void (*print)(const Person*);
     size_t (*fget)(FILE*, Person*);
     size_t (*fput)(FILE*, const Person*);
-    char* (*set_first_name)(const Person*);
-    char* (*set_last_name)(const Person*);
-    char* (*set_email)(const Person*);
-    void (*get_first_name)(Person*);
-    void (*get_last_name)(Person*);
-    void (*get_email)(Person*);
+    void (*set_first_name)(Person*, const char*);
+    void (*set_last_name)(Person*, const char*);
+    void (*set_email)(Person*, const char*);
+    char* (*get_first_name)(const Person*);
+    char* (*get_last_name)(const Person*);
+    char* (*get_email)(const Person*);
 };
+
+const PersonVTable _pvtable = {
+    .create = Person_create,
+    .destroy = Person_destroy,
+    .to_string = Person_to_string,
+    .print = Person_print,
+    .fget = Person_fget,
+    .fput = Person_fput,
+    .get_first_name = Person_get_first_name,
+    .get_last_name = Person_get_last_name,
+    .get_email = Person_get_email,
+    .set_first_name = Person_set_first_name,
+    .set_last_name = Person_set_last_name,
+    .set_email = Person_set_email,
+};
+
+struct Person {
+    PersonVTable *super;
+    /**/
+    char* fname;
+    char* lname;
+    char* email;
+};
+
 
 // Movie class
 Movie* Movie_create();
