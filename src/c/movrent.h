@@ -92,14 +92,34 @@ size_t Movie_fget(FILE*, Movie*);
 size_t Movie_fput(FILE*, const Movie*);
 char* Movie_get_title(const Movie*);
 int Movie_get_year(const Movie*);
-char* Movie_get_production(const Movie*);
+char* Movie_get_company(const Movie*);
 Person* Movie_get_director(const Movie*);
 Vector* Movie_get_stars(const Movie*);
 void Movie_set_title(Movie*, const char*);
 void Movie_set_year(Movie*, int);
-void Movie_set_production(Movie*, const char*);
+void Movie_set_company(Movie*, const char*);
 void Movie_set_director(Movie*, const Person*);
 void Movie_set_stars(Movie*, const Vector*);
+
+struct MovieVTable{
+    Movie* (*create)(void);
+    void (*destroy)(Movie*);
+    char* (*to_string)(Movie*);
+    void (*print)(Movie*);
+    size_t (*fget)(FILE*, Movie*);
+    size_t (*fput)(FILE*, const Movie*);
+    char* (*get_title)(const Movie*);
+    int (*get_year)(const Movie*);
+    char* (*get_company)(const Movie*);
+    Person* (*get_director)(const Movie*);
+    Vector* (*get_stars)(const Movie*);
+    void (*set_title)(Movie*);
+    void (*set_year)(Movie*);
+    void (*set_company)(Movie*);
+    void (*set_director)(Movie*);
+    void (*set_stars)(Movie*);
+};
+
 
 // Customer class
 Customer* Customer_create();
